@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术探索," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="当前公司的工作比较闲，而且我要为下份工作做准备，也是提高自己的技术实力，在没有工作的时候，总要学点东西 一个临时的目标是hadoop 了解了hadoop的大致功能作用后，开始着手实战hadoop 使用阿里云的ecs，最初打算自己编译源码安装hadoop，且是最新稳定版本2.5.1，但过程是艰难的。 按照http://pravinchavan.wordpress.com/2013/04/14/bui">
+<meta name="keywords" content="技术探索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="glibc升级血泪史">
+<meta property="og:url" content="http://yoursite.com/2014/11/17/glibc升级血泪史/index.html">
+<meta property="og:site_name" content="My 窝">
+<meta property="og:description" content="当前公司的工作比较闲，而且我要为下份工作做准备，也是提高自己的技术实力，在没有工作的时候，总要学点东西 一个临时的目标是hadoop 了解了hadoop的大致功能作用后，开始着手实战hadoop 使用阿里云的ecs，最初打算自己编译源码安装hadoop，且是最新稳定版本2.5.1，但过程是艰难的。 按照http://pravinchavan.wordpress.com/2013/04/14/bui">
+<meta property="og:updated_time" content="2017-09-25T17:38:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="glibc升级血泪史">
+<meta name="twitter:description" content="当前公司的工作比较闲，而且我要为下份工作做准备，也是提高自己的技术实力，在没有工作的时候，总要学点东西 一个临时的目标是hadoop 了解了hadoop的大致功能作用后，开始着手实战hadoop 使用阿里云的ecs，最初打算自己编译源码安装hadoop，且是最新稳定版本2.5.1，但过程是艰难的。 按照http://pravinchavan.wordpress.com/2013/04/14/bui">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/11/17/glibc升级血泪史/"/>
+
+
+
+
+
+  <title>glibc升级血泪史 | My 窝</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My 窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/17/glibc升级血泪史/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">glibc升级血泪史</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-17T19:07:50+08:00">
+                2014-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当前公司的工作比较闲，而且我要为下份工作做准备，也是提高自己的技术实力，在没有工作的时候，总要学点东西</p>
+<p>一个临时的目标是hadoop</p>
+<p>了解了hadoop的大致功能作用后，开始着手实战hadoop</p>
+<p>使用阿里云的ecs，最初打算自己编译源码安装hadoop，且是最新稳定版本2.5.1，但过程是艰难的。</p>
+<p>按照<a href="http://pravinchavan.wordpress.com/2013/04/14/building-apache-hadoop-from-source/，一些准备工作没问题，但用maven真正编译时，开始是ProtocolBuffer的版本不对，换了最新的，然后又是太新了..必须指定版本..折腾再折腾..终于..我放弃了..原因有二：1.我的技术方向不是java，对maven没必要特别熟悉" target="_blank" rel="external">http://pravinchavan.wordpress.com/2013/04/14/building-apache-hadoop-from-source/，一些准备工作没问题，但用maven真正编译时，开始是ProtocolBuffer的版本不对，换了最新的，然后又是太新了..必须指定版本..折腾再折腾..终于..我放弃了..原因有二：1.我的技术方向不是java，对maven没必要特别熟悉</a> 2.关键是..这个编译一次花费的时间太长了..真心感觉有点折腾不起..</p>
+<p>于是下了hadoop的编译好的版本..</p>
+<p>学习中…</p>
+<p>但新问题又来了，每次跑hadoop的命令时，总会出现一个警告，对于一个患有轻微强迫症的人，这是难以忍受的..</p>
+<p>经过一番搜索..探查..发现是glibc的版本太低的原因..</p>
+<p>阿里云的源上的glibc的最新版本也就是2.12，而hadoop提示需要2.14..</p>
+<p>我采取了手动编译更新glibc的方法..然而过程是更加曲折的..这里只说值得记忆的把..</p>
+<p>期间把系统弄坏了4次(庆幸阿里云会自动备份磁盘，每次系统坏了只需要回滚磁盘就行了..)..</p>
+<p>1.这应该是最菜鸟的错误，把glibc编译并安装到制定好的目录后，我把/lib64/libc.so.6删了（本来打算先删了，然后新建立软连接到libc-2.14.so），结果是悲剧的..</p>
+<p>2.借鉴了上次的悲剧，且经过了验证（glibc.so.6只需要在任一个系统库搜索路径存在且有效即可,这个我用我之前的安装的虚拟机测试的..），我把libc安装到了默认的/usr/local下，且在/etc/ld.so.conf中配置了/usr/local/bin目录，然后再删/lib64/libc.so.6，结果仍是悲剧了..（这个具体原因不明..估计因为glibc的版本和ld.so的版本不一致且glibc的路径是通过/etc/ld.so.conf指定的….）</p>
+<p>3.借鉴了上次的错误，以为是ld-linux-x86-64.so.2的问题，我先制作软连接/lib/ld-linux-x86-64.so.2，然后删除了/lib64/ld-linux-x86-64.so.2..结果悲剧了..开始报/lib64/ld-linux-x86-64.so.2找不到的错误…</p>
+<p>4.借鉴了以上错误，我开始寻求baidu帮助..在一篇博文里，直接将glibc安装到了/usr下（不过貌似他只安装了libc的某些模块），我开始认为，不管怎样，如果只安装libc到/usr下的某些目录，不影响/lib64下面的文件的话，无论如何不会有问题的..事实是悲痛的..貌似安装到/usr会自动把.so文件安装到/lib64下面..结果出现了这样的问题，似乎这次安装libc，把其他的一些.so文件覆盖了旧的，而并没有更新libc.so.6,..所以运行命令要么出现segment fault的问题（不知为什么..）,要么是说glibc的版本太低（不是2.14）…</p>
+<p>借鉴了以上错误，我开始寻求google帮助..参考<a href="http://blog.csdn.net/nameofhsw/article/details/12781905，终于第一次有了比较完整的结果" target="_blank" rel="external">http://blog.csdn.net/nameofhsw/article/details/12781905，终于第一次有了比较完整的结果</a>..</p>
+<p>但新问题出现了..我的openjdk1.7.0的任何命令的运行时，都没有了任何输出，而改用旧的libc2.12是正常的..</p>
+<p>次日..</p>
+<p>之前用的java版本openjdk1.7.0，之前因为工作关系，下了一个sun java1.7的rpm包，遂卸载了旧的openjdk，换成sun的试试，结果是一样的..</p>
+<p>在网上查不到这样的情况..</p>
+<p>突然想到之前学习到的一个linux命令strace，遂strace javac试试..</p>
+<p>javac似乎在系统调用futex时停住了…直觉是需要某个信号wake这个进程，在网上查了查，貌似和多线程相关..</p>
+<p>发现futex系统调用的第三个参数是一个数字，很像pid，但是我用ps -ef|grep &lt;pid&gt;根本找不到这样的进程…但用ps -ef|grep java时，发现那个pid比javac进程的pid大1…此事必有蹊跷…</p>
+<p>用strace -p &lt;那个pid&gt;时，发现也是停在了futex处…这个futex的第三个参数是2…ps -ef发现pid为2的CMD为[kthreadd]…百度一下…貌似说它为内核线程之父…</p>
+<p>查看strace javac的输出，发现它运行期间加载了libpthread.so.0，且是从我安装glibc2.14的目录中加载的…</p>
+<p>壮着胆..把libpthread.so.0及其指向的真正的.so文件移到了别的地方…结果是幸福的…javac能用了…</p>
+<p>注：其实&lt;那个pid&gt;应该是线程的id，可以用ps -eLf查看(LWP列)，应该是javac创建的一个线程…</p>
+<p>完..</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术探索/" rel="tag"># 技术探索</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/12/2014-11-12/" rel="next" title="2014.11.12">
+                <i class="fa fa-chevron-left"></i> 2014.11.12
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/25/hadoop学习之2014-11-25/" rel="prev" title="hadoop学习之2014.11.25">
+                hadoop学习之2014.11.25 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">zhaohui</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaohui</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

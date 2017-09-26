@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="My 窝">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="My 窝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="My 窝">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+
+
+
+
+
+  <title>My 窝</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My 窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/07/Django的cache机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/07/Django的cache机制/" itemprop="url">Django的cache机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-07T22:30:15+08:00">
+                2015-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先看代码：<br>`<br>from django.http import HttpResponse<br>import random<br>from django.views.decorators.cache import cache_page<br>from django.core.cache import cache<br>from django.views.decorators.cache import cache_control<br>import datetime</p>
+<p>@cache_page(15)<br>def cache1(request):<br>    return HttpResponse(“It is %s”%datetime.datetime.now())</p>
+<p>def cache2(request):<br>    res = cache.get(“cache2”)<br>    if res is not None:return HttpResponse(res)<br>    res = “It is %s”%datetime.datetime.now()<br>    cache.set(“cache2”, res, 15)<br>    return HttpResponse(res)</p>
+<p>@cache_control(public=True, max_age=10)<br>def cache3(request):<br>    return HttpResponse(“It is %s”%datetime.datetime.now())</p>
+<p>def nocache(request):<br>    return HttpResponse(“It is %s”%datetime.datetime.now())<br>`<br>1、服务器端cache1<br><a href="http://182.92.214.184:8800/cache1/?p=1" target="_blank" rel="external">http://182.92.214.184:8800/cache1/?p=1</a><br><a href="http://182.92.214.184:8800/cache1/?p=2" target="_blank" rel="external">http://182.92.214.184:8800/cache1/?p=2</a><br>说明：用cache_page实现的话，代码比较简洁，同一url不同查询参数独立缓存<br>2、服务器端cache2<br><a href="http://182.92.214.184:8800/cache2/?p=1" target="_blank" rel="external">http://182.92.214.184:8800/cache2/?p=1</a><br><a href="http://182.92.214.184:8800/cache2/?p=2" target="_blank" rel="external">http://182.92.214.184:8800/cache2/?p=2</a><br>说明：这种cache方式完全由用户自定义<br>3、浏览器cache<br><a href="http://182.92.214.184:8800/cache3/?p=1" target="_blank" rel="external">http://182.92.214.184:8800/cache3/?p=1</a><br><a href="http://182.92.214.184:8800/cache3/?p=2" target="_blank" rel="external">http://182.92.214.184:8800/cache3/?p=2</a><br>说明：这个只是在response的header中定义了cache-control，这种cache方式受到浏览器的影响（control+F5就什么都没了）<br>4、无cache<br><a href="http://182.92.214.184:8800/nocache/" target="_blank" rel="external">http://182.92.214.184:8800/nocache/</a><br>说明：啥都没有..</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/06/关于建立基于python的web应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/06/关于建立基于python的web应用/" itemprop="url">关于建立基于python的web应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-06T17:57:43+08:00">
+                2015-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基于python的web应用的开发目前大多基于WSGI，主要分为web服务器和web应用程序（或框架）两大部分。<br>关于WSGI，可以参考：<br><a href="http://brief.sinaapp.com/blog/31/" target="_blank" rel="external">http://brief.sinaapp.com/blog/31/</a><br><a href="http://zh.wikipedia.org/wiki/Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E5%85%B3%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">http://zh.wikipedia.org/wiki/Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E5%85%B3%E6%8E%A5%E5%8F%A3</a><br>web服务器有多种选择，具体比较参见：<br><a href="https://www.digitalocean.com/community/tutorials/a-comparison-of-web-servers-for-python-based-web-applications" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/a-comparison-of-web-servers-for-python-based-web-applications</a><br>目前应用比较多的是uwsgi<br>web开发框架也有多种选择，参见：<br><a href="https://www.airpair.com/python/posts/django-flask-pyramid" target="_blank" rel="external">https://www.airpair.com/python/posts/django-flask-pyramid</a><br>值得一提的是，pyramid是“The Pylons Project”的第一个package(<a href="http://www.pylonsproject.org/" target="_blank" rel="external">http://www.pylonsproject.org/</a>)</p>
+<p>另外，这些web服务器一般使用nginx或者apache作为反向代理</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/06/理解python的字符串编码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/06/理解python的字符串编码/" itemprop="url">理解python的字符串编码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-06T11:55:08+08:00">
+                2015-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先需要了解的是：<br>字符集定义了字符的集合，如ascii字符集主要包括英文字母，数字，一些控制符合等，但不包括汉字，日文符号。gb2312字符集包含ascii定义的所有字符，汉字，但也不包含日文符合。unicode字符集包含每种语言中的每个字符。<br>字符集的编码方案是针对特定字符集的每个字符的计算机二进制表示方案，主要用于计算机内部的存储和网络设备间的传输。<br>unicode只是定义了一个“字符集”，而utf8、utf16、utf32是针对unicode字符集的编码方案<br>gb2312也是字符集(unicode的子集)，由于它的编码方案通常只用EUC-CN，也可以说是一种编码方案<br>gbk是gb2312的延伸（超集），和gb2312类似<br>可参考：<a href="http://www.zhihu.com/question/20650946" target="_blank" rel="external">http://www.zhihu.com/question/20650946</a><br><a href="http://stackoverflow.com/questions/643694/utf-8-vs-unicode" target="_blank" rel="external">http://stackoverflow.com/questions/643694/utf-8-vs-unicode</a></p>
+<p>python内部的字符只是unicode字符集中的字符，字符串是这些字符的组合，不涉及编码方案（只是内部处理的话，不涉及存储和传输）。<br>这点在python3中体现的很明显，内置类型str不涉及编码方案，要具体到编码的话用bytes，而当进行存储或传输时，要求必须是bytes，如urllib.request中的http请求，文件的读写（调用open时，有默认的编码方案，或者用可选参数encoding指定），socket的send方法等。而且str和bytes不允许互操作。<br>python2中的这点不是很明确，总体来说，python2的u””相当于python3中的str，而普通的””相当于bytes</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/04/DIYwordpress日历样式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/03/04/DIYwordpress日历样式/" itemprop="url">DIYwordpress日历样式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-04T16:41:59+08:00">
+                2015-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直都不太喜欢博客的日历样式，对于写过日志的那一天没有特殊颜色标示<br>查看仪表盘，也没有设置这种样式的选项，只能自己DIY了..<br>用”审查元素”查看写过日志那天的a元素的样式，启作用的样式为：<br>`</p>
+<p>#sidebar a,</p>
+<p>#sidebar a:visited {<br>    color: #2f2f2f;<br>    text-decoration: none;<br>}<br><code>仪表盘提供的有编辑相应主题css的页面，于是加了下面的样式：</code></p>
+<p>#calendar_wrap a{<br>    color: #16D3B5;<br>}</p>
+<p>#calendar_wrap a:visited{<br>    color: #A09B9B;<br>}</p>
+<p>#calendar_wrap a:hover{<br>    color: #00a498;<br>}<br>`<br>效果如下：<br><img src="http://182.92.214.184/wp-content/uploads/2015/03/rili.png" alt="rili"><br>变成了<br><img src="http://182.92.214.184/wp-content/uploads/2015/03/rili_new.png" alt="rili_new"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/09/python的socket实现http服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/09/python的socket实现http服务器/" itemprop="url">python的socket实现http服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-09T18:05:19+08:00">
+                2015-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为了深入熟悉python，完成了下面的一个简单的http服务器。</p>
+<p>代码用到的module主要有：</p>
+<p>multiprocessing，来处理并发http请求，不用的threading的原因是python的gil</p>
+<p>socket，接受http请求，并返回响应</p>
+<p>select，无阻塞接收http请求数据</p>
+<p>re，模仿django，处理http请求的服务器端文件路径</p>
+<p>logging，日志记录</p>
+<p>mimetypes，获取文件的mime类型</p>
+<p>服务器已经布在了<a href="http://182.92.214.184:8000/" target="_blank" rel="external">这里</a>，或者<a href="http://182.92.214.184:8000/static/1.jpg" target="_blank" rel="external">这个</a></p>
+<p>`<br>from multiprocessing import Pool<br>import socket,select<br>import os,sys<br>import re<br>import logging<br>import mimetypes<br>import traceback<br>from logging.handlers import RotatingFileHandler</p>
+<p>ilog = None</p>
+<p>def init_log():<br>    global ilog<br>    ilog = logging.getLogger(“socketserver”)<br>    log_dir = “/var/log/socketserver”<br>    if not os.path.exists(log_dir):os.makedirs(log_dir)<br>    h1 = RotatingFileHandler(os.path.join(log_dir, “access.log”), maxBytes=5<em>1024</em>1024, backupCount=10)<br>    h2 = logging.StreamHandler(sys.stdout)<br>    f = logging.Formatter(“%(asctime)s:%(levelname)s:%(message)s”, “%Y-%m-%d %H:%M:%S”)<br>    h1.setFormatter(f)<br>    h2.setFormatter(f)<br>    ilog.addHandler(h1)<br>    ilog.addHandler(h2)<br>    ilog.setLevel(logging.DEBUG)</p>
+<p>SERVER = “Guess”<br>ENCODING = “utf8”</p>
+<p>code_dict = {“200”:”OK”,”404”:”Not Found”}<br>def res_header(status_code,content_type,content_length):<br>    if status_code in code_dict:status_info = code_dict[status_code]<br>    else:status_info = “Error”<br>    header = “HTTP/1.1 %s %s\r\n”%(status_code, status_info)<br>    header += “Server: %s\r\n”%SERVER<br>    header += “Content-Type: %s\r\n”%content_type<br>    header += “Content-Length: %s\r\n”%content_length<br>    header += “\r\n”<br>    return header.encode(ENCODING)</p>
+<p>def staticfile(addr, method, path, pid, req):<br>    path = “.”+path<br>    if not os.path.exists(path):<br>        res = “404 Not Found”.encode(“utf8”)<br>        return res_header(“404”, “text/plain”, len(res))+res<br>    content_type = mimetypes.guess_type(path)[0] or “text/plain”<br>    f = open(path, “rb”)<br>    data = f.read()<br>    f.close()<br>    content_length = len(data)<br>    return res_header(“200”, content_type, content_length)+data</p>
+<p>def default(addr, method, path, pid, req):<br>    res = “”<br>    res += “Hello, %s:%s\n”%(addr[0], addr[1])<br>    res += “You are %sing %s”%(method, path)<br>    res += “\n\n”<br>    res += “Your header is:\n”<br>    res += req<br>    res += “                   Process %s”%pid<br>    res = res.encode(ENCODING)<br>    return res_header(“200”, “text/plain”, len(res))+res</p>
+<p>urls = [(“^/favicon.ico$”, staticfile), (“^/static/.<em>$”, staticfile), (“^.</em>$”,default)]</p>
+<p>def handle_request(addr, req, pid):<br>    req = req.decode(“utf8”)<br>    headers = req.split(“\t\n”)<br>    tmp = headers[0].split()<br>    req_method = tmp[0]<br>    req_path = tmp[1]<br>    ilog.info(“Process %s is handleing a request: %s:%s %s %s”%(pid, addr[0], addr[1], req_method, req_path))</p>
+<pre><code>#print(req_path)
+res = b&quot;error&quot;
+for re_path,control in urls:
+    if re.search(re_path, req_path) is not None:
+        res = control(addr, req_method, req_path, pid, req)
+        break
+return res
+</code></pre><p>def worker(s):<br>    pid = os.getpid()<br>    try:<br>        while True:<br>            cs,addr = s.accept():<br>            try:</p>
+<pre><code>            #req = cs.recv(1024)
+            req = b&quot;&quot;
+            while True:
+                #set timeout to 0.1s
+                r,w,e = select.select([cs],[],[],0.1)
+                if len(r)&gt;0:
+                    data = cs.recv(1024)
+                    #in case client close the connect
+                    if data==b&quot;&quot;:break
+                    req += data
+                else:break
+                #in case too big request
+                if len(req)&gt;8*1024:break
+            if len(req)&gt;8*1024 or len(req)&lt;8:continue
+            #print(repr(req.decode(&quot;utf8&quot;)))
+            res = handle_request(addr, req, pid)
+            cs.send(res)
+        except:
+            error_info = traceback.format_exc()
+            print(error_info)
+            ilog.error(error_info)
+        cs.close()
+except KeyboardInterrupt:pass
+</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    argv = sys.argv<br>    if len(argv)&lt;2:<br>        print(“usage:%s [port]”%argv[0])<br>        sys.exit(1)<br>    port = int(argv[1])</p>
+<pre><code>s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((&quot;&quot;,port))
+s.listen(10)
+
+init_log()
+p = Pool(10)
+ilog.info(&quot;server running at %s..&quot;%port)
+#p.map_async(worker, [s]*10)
+p.map(worker, [s]*10)
+print(&quot;exit..&quot;)
+</code></pre><p>`</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/06/http请求阻塞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/06/http请求阻塞/" itemprop="url">http请求阻塞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-06T13:45:39+08:00">
+                2015-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天发现前几天写的一个定时爬虫程序，突然无故暂停了。</p>
+<p>程序用了python定时框架apscheduler，我加了28个Job，其中有3个job出现了异常。</p>
+<p>查看日志，发现是某一次的job执行似乎是停住了，而job的最大同时运行实例数为1，所以下一次的任务执行也就跳了过去（程序定时每半小时运行一次）。导致之后差不到两天的数据没能抓取到。</p>
+<p>查看代码，感觉像调用urllib2.urlopen时，程序得不到回应，所以停住了。</p>
+<p>于是运行</p>
+<p><code>ps -eLo user,pid,ppid,pgid,nlwp,lwp,sess,start_time,command,wchan|grep write_AQM</code></p>
+<p>得到结果如下：</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150820.jpg" alt="QQ图片20150206150820"></p>
+<p>可以看到正好有3个lwp的wchan是sk_wait_data</p>
+<p>再次运行</p>
+<p><code>strace -p pid</code></p>
+<p>其中pid为那3个lwp的id，得到</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150908.jpg" alt="QQ图片20150206150908"></p>
+<p>由此，基本可以确定程序在进行http请求时，一直得不到响应，就阻塞在了那里。</p>
+<p>解决方法很简单，在调用urllib2.urlopen时，多传一个参数timeout，如timeout=10。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/10/Fortran-netCDF-library安装记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/10/Fortran-netCDF-library安装记/" itemprop="url">Fortran netCDF library安装记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-10T18:32:00+08:00">
+                2014-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>帮一个朋友安装国内某名校某人写的一个fortran程序</p>
+<p>此程序主要用到了netcdf库.</p>
+<p>最开始运行make，报undefined reference to `netcdf_mp_nf90_get_att_one<em>fourbytereal</em>‘之类的错，经网上一顿搜索，问题定位在fortran编译器没有链接到netCDF Fortran库..</p>
+<p>查看Makefile，加上-lnetcdff，报没有libnetcdff.so..</p>
+<p>开始艰难的编译Fortran netCDF library..</p>
+<p>IBM CRL的网络一如既往的不给力..幸好的是..其中的yellowzone区域的网络还是很给力的的..</p>
+<p>安装Fortran netCDF library需要C netCDF library，安装C netCDF library的过程中又缺少了hdf5库..</p>
+<p>下载hdf5源码包..安装..</p>
+<p>之前有安装过C netCDF library，除了make check了一晚上还没结束..一切还是比较顺利的..</p>
+<p>安装Fortran netCDF library是比较痛苦的，中间几乎有想放弃的时候.</p>
+<p>1.系统自带的fortran编译器gfortran版本过低，configure的时候就一直出问题,换成了gfortran44..</p>
+<p>2.用gfortran44配置时，同时需要设置环境变量CC，指向之前编译C库的C编译器，如/usr/bin/gcc..</p>
+<p>3.configure通过，但make时一直报莫名奇妙的错误,DHAVE_CONFIG_H: Command not found或者g: Command not found..经过一阵煎熬..折腾..把gfortran44 mv到gfortran(之前用gfrtran44编译是设置的环境变量FC)，勉强make成功..</p>
+<p>4.这下有了libnetcdff.so，但仍然报undefined reference to `netcdf_mp_nf90_get_att_one<em>fourbytereal</em>‘，用nm命令查看libnetcdff.so，只发现了netcdf_MOD_nf90_get_att_one_fourbytereal..改变Makefile脚本，设置FC为gfortran(之前是mpif90 -f90=ifort)，但出现了其他的错..考虑用ifort编译Fortran netCDF..编译成功..并把FC设置为ifort..make成功…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/03/db2学习之2014-12-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/03/db2学习之2014-12-03/" itemprop="url">db2学习之2014.12.03</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-03T18:48:07+08:00">
+                2014-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>2014.12.02，db2 crash..</p>
+<p>我并不是专门负责db2管理的，出于兴趣，还是去探索了下…</p>
+<p>网上一通搜索，定位了问题应该是下面中的一个：</p>
+<p>1. linux服务器某些限制，如限制进程创建的线程数，使用到的最大虚拟内存</p>
+<p>2. db2配置的问题，过多的客户端程序连接db2 server，导致超过了db2本身的最大agents(连接)数.</p>
+<p>又一桶搜索，加上稍稍的分析，慢慢的特别聚焦到第二个原因上的..</p>
+<p>通过命令db2 get snapshot for database manager，发现db2的连接数在170左右，而查看db2配置(db2 get dbm cfg)，发现输出中有下面两句：</p>
+<p>Max number of coordinating agents     (MAX_COORDAGENTS) = AUTOMATIC(200)</p>
+<p>Max number of client connections      (MAX_CONNECTIONS) = AUTOMATIC(MAX_COORDAGENTS)</p>
+<p>看见了200这个数，比较170，感觉的确相差不多…</p>
+<p>唯一说不通的是，在其他linux服务器上的db2(同样的数据库，同样的应用)为什么从没出现过类似情况？</p>
+<p>用命令db2 list applications show detail查看详细数据库的连接情况，发现crash的db2的本地连接远多于其他的服务器…</p>
+<p>进一步分析输出，发现db2对于每个database都有差不多30个的本地连接，而未crash的db2只有大约10个…</p>
+<p>我们的db2上创建了3个database，算起来就多了差不多3*20个的连接，似乎可以解释了</p>
+<p>实际上，是因为crash的db2的linux服务器实在太好了…24核的…而其他的linux服务器是4核的…</p>
+<p>db2会根据linux服务器的虚拟cpu数来创建db2fw线程..导致对于每个database多创建了20个db2fw，也多了20个agents(连接)..</p>
+<p>经过进一步的探查..</p>
+<p>最大agents的数目其实并不是200，前面有个AUTOMATIC，db2会根据数据库的负载，适当增加这个数目..</p>
+<p>而一个client connection也并不一定对应一个coordinating agent…</p>
+<p>昨天写过一个shell脚本来定时监测agents数目，发现在23:18左右，agents数据实际是超过了200的…而db2并未崩溃…</p>
+<p>昨天crash的原因也许并不在此…</p>
+<p>说些“题外话”把..我其实并不想花费太多时间在这个上边..db2在国内，除了IBM自己..有多少IT企业在用呢？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/shell学习之2014-11-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/11/25/shell学习之2014-11-25/" itemprop="url">shell学习之2014.11.25</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-25T18:53:44+08:00">
+                2014-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>$符号的特殊用法..</p>
+<p>截断：</p>
+<p>input: var=”abcde”;echo ${var%d*}</p>
+<p>output: abc</p>
+<p>替换</p>
+<p>input:</p>
+<p>STRING=”This is a string”;echo ${STRING// /<em>};echo ${STRING/ /</em>}</p>
+<p>output:</p>
+<p>This_is_a_string<br>This_is a string</p>
+<p>默认：</p>
+<p>input: default=”hello”; unset var; echo ${var:-$default}</p>
+<p>output: hello</p>
+<p>完全的见<a href="http://tiswww.case.edu/php/chet/bash/bashref.html#SEC32" target="_blank" rel="external">http://tiswww.case.edu/php/chet/bash/bashref.html#SEC32</a></p>
+<p>&nbsp;</p>
+<p>在bash中的一些快捷键：</p>
+<p>ctrl+w:  删除一个单词</p>
+<p>ctrl+u: 从光标所在位置删除到行的开始</p>
+<p>ctrl+a: 移动光标到行首</p>
+<p>ctrl+e: 移动光标到行末</p>
+<p>推荐<a href="http://samrowe.com/wordpress/advancing-in-the-bash-shell/" target="_blank" rel="external">http://samrowe.com/wordpress/advancing-in-the-bash-shell/</a></p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/hadoop学习之2014-11-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/11/25/hadoop学习之2014-11-25/" itemprop="url">hadoop学习之2014.11.25</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-25T18:32:36+08:00">
+                2014-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为了使用hadoop2.5.1,花费了n多时间，最后还是改用了hadoop1.2.1</p>
+<p>原因在于，似乎没有hadoop2.x的中文文档（囧..），只找到了一个1.0.4的doc，hadoop2.x和hadoop1.x的差别很大，貌似还是由不同的组织进行维护的，发现1.0.4的wordcount V2.0在安装2.5.1不能运行后，果断安装了一个hadoop1.2.1..</p>
+<p>安装1.2.1用的是rpm包</p>
+<p>不同于直接解压.tar.gz，用rpm安装的话，hadoop的一些文件的位置是变化了的，譬如，启动关闭dfs或者mapreduce的.sh脚本默认放在了/usr/sbin目录下，hadoop的配置文件如hadoop-env.xml、hdfs-sites.xml的都放在了/etc/hadoop目录下，而hadoop安装在了/usr/share/hadoop下</p>
+<p>安装并配置完毕后，开始运行wordcount，出现了“There is insufficient memory for the Java Runtime Environment to continue”这个错误，调试了很久，最后还是含泪加了我的阿里云ECS的内存，从1G升级到2G，重启，果断那个错误消失了..</p>
+<p>一阵学习中..</p>
+<p>看了<a href="http://hadoop.apache.org/docs/r1.0.4/cn/cluster_setup.html后，突然想了解下hadoop的启动过程" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/cluster_setup.html后，突然想了解下hadoop的启动过程</a>..</p>
+<p>从start-dfs.sh到hadoop-daemons.sh再到slaves.sh，发现了</p>
+<p>ssh $HADOOP_SSH_OPTS $slave $”${@// /\ }” 2&gt;&amp;1 | sed “s/^/$slave: /“ &amp;</p>
+<p>这句，看来应该是nameNode主机通过ssh远程在dataNode主机执行命令完成启动dataNode的hadoop的..</p>
+<p>对于linux的sed的使用不是很熟悉，想以后该学习下..</p>
+<p>但$”${@// /\ }”这句，我始终不太懂..特别是类似${var/ /}的用法..</p>
+<p>google了一下，详见另一篇文件&lt;shell学习之2014.11.25&gt;..</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">zhaohui</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaohui</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/12/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-python的socket实现http服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/09/python的socket实现http服务器/" class="article-date">
+  <time datetime="2015-02-09T10:05:19.000Z" itemprop="datePublished">2015-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/09/python的socket实现http服务器/">python的socket实现http服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了深入熟悉python，完成了下面的一个简单的http服务器。</p>
+<p>代码用到的module主要有：</p>
+<p>multiprocessing，来处理并发http请求，不用的threading的原因是python的gil</p>
+<p>socket，接受http请求，并返回响应</p>
+<p>select，无阻塞接收http请求数据</p>
+<p>re，模仿django，处理http请求的服务器端文件路径</p>
+<p>logging，日志记录</p>
+<p>mimetypes，获取文件的mime类型</p>
+<p>服务器已经布在了<a href="http://182.92.214.184:8000/" target="_blank" rel="external">这里</a>，或者<a href="http://182.92.214.184:8000/static/1.jpg" target="_blank" rel="external">这个</a></p>
+<p>`<br>from multiprocessing import Pool<br>import socket,select<br>import os,sys<br>import re<br>import logging<br>import mimetypes<br>import traceback<br>from logging.handlers import RotatingFileHandler</p>
+<p>ilog = None</p>
+<p>def init_log():<br>    global ilog<br>    ilog = logging.getLogger(“socketserver”)<br>    log_dir = “/var/log/socketserver”<br>    if not os.path.exists(log_dir):os.makedirs(log_dir)<br>    h1 = RotatingFileHandler(os.path.join(log_dir, “access.log”), maxBytes=5<em>1024</em>1024, backupCount=10)<br>    h2 = logging.StreamHandler(sys.stdout)<br>    f = logging.Formatter(“%(asctime)s:%(levelname)s:%(message)s”, “%Y-%m-%d %H:%M:%S”)<br>    h1.setFormatter(f)<br>    h2.setFormatter(f)<br>    ilog.addHandler(h1)<br>    ilog.addHandler(h2)<br>    ilog.setLevel(logging.DEBUG)</p>
+<p>SERVER = “Guess”<br>ENCODING = “utf8”</p>
+<p>code_dict = {“200”:”OK”,”404”:”Not Found”}<br>def res_header(status_code,content_type,content_length):<br>    if status_code in code_dict:status_info = code_dict[status_code]<br>    else:status_info = “Error”<br>    header = “HTTP/1.1 %s %s\r\n”%(status_code, status_info)<br>    header += “Server: %s\r\n”%SERVER<br>    header += “Content-Type: %s\r\n”%content_type<br>    header += “Content-Length: %s\r\n”%content_length<br>    header += “\r\n”<br>    return header.encode(ENCODING)</p>
+<p>def staticfile(addr, method, path, pid, req):<br>    path = “.”+path<br>    if not os.path.exists(path):<br>        res = “404 Not Found”.encode(“utf8”)<br>        return res_header(“404”, “text/plain”, len(res))+res<br>    content_type = mimetypes.guess_type(path)[0] or “text/plain”<br>    f = open(path, “rb”)<br>    data = f.read()<br>    f.close()<br>    content_length = len(data)<br>    return res_header(“200”, content_type, content_length)+data</p>
+<p>def default(addr, method, path, pid, req):<br>    res = “”<br>    res += “Hello, %s:%s\n”%(addr[0], addr[1])<br>    res += “You are %sing %s”%(method, path)<br>    res += “\n\n”<br>    res += “Your header is:\n”<br>    res += req<br>    res += “                   Process %s”%pid<br>    res = res.encode(ENCODING)<br>    return res_header(“200”, “text/plain”, len(res))+res</p>
+<p>urls = [(“^/favicon.ico$”, staticfile), (“^/static/.<em>$”, staticfile), (“^.</em>$”,default)]</p>
+<p>def handle_request(addr, req, pid):<br>    req = req.decode(“utf8”)<br>    headers = req.split(“\t\n”)<br>    tmp = headers[0].split()<br>    req_method = tmp[0]<br>    req_path = tmp[1]<br>    ilog.info(“Process %s is handleing a request: %s:%s %s %s”%(pid, addr[0], addr[1], req_method, req_path))</p>
+<pre><code>#print(req_path)
+res = b&quot;error&quot;
+for re_path,control in urls:
+    if re.search(re_path, req_path) is not None:
+        res = control(addr, req_method, req_path, pid, req)
+        break
+return res
+</code></pre><p>def worker(s):<br>    pid = os.getpid()<br>    try:<br>        while True:<br>            cs,addr = s.accept():<br>            try:</p>
+<pre><code>            #req = cs.recv(1024)
+            req = b&quot;&quot;
+            while True:
+                #set timeout to 0.1s
+                r,w,e = select.select([cs],[],[],0.1)
+                if len(r)&gt;0:
+                    data = cs.recv(1024)
+                    #in case client close the connect
+                    if data==b&quot;&quot;:break
+                    req += data
+                else:break
+                #in case too big request
+                if len(req)&gt;8*1024:break
+            if len(req)&gt;8*1024 or len(req)&lt;8:continue
+            #print(repr(req.decode(&quot;utf8&quot;)))
+            res = handle_request(addr, req, pid)
+            cs.send(res)
+        except:
+            error_info = traceback.format_exc()
+            print(error_info)
+            ilog.error(error_info)
+        cs.close()
+except KeyboardInterrupt:pass
+</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    argv = sys.argv<br>    if len(argv)&lt;2:<br>        print(“usage:%s [port]”%argv[0])<br>        sys.exit(1)<br>    port = int(argv[1])</p>
+<pre><code>s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((&quot;&quot;,port))
+s.listen(10)
+
+init_log()
+p = Pool(10)
+ilog.info(&quot;server running at %s..&quot;%port)
+#p.map_async(worker, [s]*10)
+p.map(worker, [s]*10)
+print(&quot;exit..&quot;)
+</code></pre><p>`</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/09/python的socket实现http服务器/" data-id="cj80hjlji003yf2632owy4fcd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术探索/">技术探索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-QQ图片20150206150820" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/QQ图片20150206150820/" class="article-date">
+  <time datetime="2015-02-06T07:11:32.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/QQ图片20150206150820/">QQ图片20150206150820</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/QQ图片20150206150820/" data-id="cj80hjli2002qf263naha3twu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-QQ图片20150206150908" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/QQ图片20150206150908/" class="article-date">
+  <time datetime="2015-02-06T07:11:32.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/QQ图片20150206150908/">QQ图片20150206150908</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/QQ图片20150206150908/" data-id="cj80hjli3002sf263na4v0xwd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Penguins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/Penguins/" class="article-date">
+  <time datetime="2015-02-06T06:40:58.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/Penguins/">Penguins</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/Penguins/" data-id="cj80hjlhy002kf263aooklgia" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Koala" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/Koala/" class="article-date">
+  <time datetime="2015-02-06T06:40:56.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/Koala/">Koala</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/Koala/" data-id="cj80hjlg40016f263swwr5mm1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Jellyfish" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/Jellyfish/" class="article-date">
+  <time datetime="2015-02-06T06:40:54.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/Jellyfish/">Jellyfish</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/Jellyfish/" data-id="cj80hjlfw0011f263jdu8egjz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Chrysanthemum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/Chrysanthemum/" class="article-date">
+  <time datetime="2015-02-06T06:40:51.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/Chrysanthemum/">Chrysanthemum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/Chrysanthemum/" data-id="cj80hjlff000rf2631gguvxxk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-http请求阻塞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/06/http请求阻塞/" class="article-date">
+  <time datetime="2015-02-06T05:45:39.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/06/http请求阻塞/">http请求阻塞</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天发现前几天写的一个定时爬虫程序，突然无故暂停了。</p>
+<p>程序用了python定时框架apscheduler，我加了28个Job，其中有3个job出现了异常。</p>
+<p>查看日志，发现是某一次的job执行似乎是停住了，而job的最大同时运行实例数为1，所以下一次的任务执行也就跳了过去（程序定时每半小时运行一次）。导致之后差不到两天的数据没能抓取到。</p>
+<p>查看代码，感觉像调用urllib2.urlopen时，程序得不到回应，所以停住了。</p>
+<p>于是运行</p>
+<p><code>ps -eLo user,pid,ppid,pgid,nlwp,lwp,sess,start_time,command,wchan|grep write_AQM</code></p>
+<p>得到结果如下：</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150820.jpg" alt="QQ图片20150206150820"></p>
+<p>可以看到正好有3个lwp的wchan是sk_wait_data</p>
+<p>再次运行</p>
+<p><code>strace -p pid</code></p>
+<p>其中pid为那3个lwp的id，得到</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150908.jpg" alt="QQ图片20150206150908"></p>
+<p>由此，基本可以确定程序在进行http请求时，一直得不到响应，就阻塞在了那里。</p>
+<p>解决方法很简单，在调用urllib2.urlopen时，多传一个参数timeout，如timeout=10。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/06/http请求阻塞/" data-id="cj80hjlit003hf263orank1co" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术探索/">技术探索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2014-02-05之感想" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/05/2014-02-05之感想/" class="article-date">
+  <time datetime="2015-02-05T07:17:07.000Z" itemprop="datePublished">2015-02-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/05/2014-02-05之感想/">2014.02.05之感想</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>人生至此的几大遗憾：</p>
+<pre><code>1、没有一个人生伴侣
+
+2、没有出过国
+
+3、没有比较明确的人生目标
+
+4、在想与做之间，经常有所犹豫，不够果断
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/05/2014-02-05之感想/" data-id="cj80hjlea0002f263liuav6a9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活杂想/">生活杂想</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2015-02-02记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/02/2015-02-02记/" class="article-date">
+  <time datetime="2015-02-02T10:55:03.000Z" itemprop="datePublished">2015-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/02/2015-02-02记/">2015.02.02记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天为了确认她是否看了我的信，特意安装了一个访问统计的插件SlimStat</p>
+<pre><code>昨天晚上到现在，时不时的查看网站的访问情况，查看时总是带有难言的感受的
+
+可是始终只有我的访问...
+
+不禁又想起过去的许多事，又担心起你的身体
+
+你还好吗？
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/02/2015-02-02记/" data-id="cj80hjleu000bf263dv2exzey" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/未分类/">未分类</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/11/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三体/">三体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感/">情感</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/房地产/">房地产</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术探索/">技术探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日记/">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/未分类/">未分类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活杂想/">生活杂想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股市/">股市</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LeetCode/" style="font-size: 18px;">LeetCode</a> <a href="/tags/三体/" style="font-size: 10px;">三体</a> <a href="/tags/情感/" style="font-size: 12px;">情感</a> <a href="/tags/房地产/" style="font-size: 10px;">房地产</a> <a href="/tags/技术探索/" style="font-size: 20px;">技术探索</a> <a href="/tags/日记/" style="font-size: 14px;">日记</a> <a href="/tags/未分类/" style="font-size: 14px;">未分类</a> <a href="/tags/生活杂想/" style="font-size: 16px;">生活杂想</a> <a href="/tags/股市/" style="font-size: 10px;">股市</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/26/未来的路/">未来的路</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/首页/">首页</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Django-REST-framework小探/">Django REST framework小探</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/高晓松的脱口秀/">高晓松的脱口秀</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
