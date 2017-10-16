@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -73,6 +73,7 @@
 <meta property="og:title" content="My 窝">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="My 窝">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="My 窝">
 
@@ -122,7 +123,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -204,6 +205,128 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/08/ajax的cache选项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/08/ajax的cache选项/" itemprop="url">ajax的cache选项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-08T16:19:02+08:00">
+                2015-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这个选项默认为true(dataType选项为script和jsonp时除外), 因此默认情况下的表现与点击打开某个超链接的cache效果相同, 即在请求成功时, 如果web服务器的response中指定了max-age, 浏览器会把ajax请求的结果缓存下来, 而如果接下来的同样的请求的时间没有超过指定的max-age, 则浏览器会自动从缓存中取出数据返回, 而不会去再次请求web服务器.</p>
+<p>注意一: 这与在一个页面按F5的效果不完全相同,在按F5的情况下,当前页面会忽略max-age,但会把结果缓存起来</p>
+<p>注意二: 这里仅指客户端缓存,而且是浏览器完全支持cache-control</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1425,138 +1548,6 @@ print(&quot;exit..&quot;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/hadoop学习之2014-11-25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My 窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/25/hadoop学习之2014-11-25/" itemprop="url">hadoop学习之2014.11.25</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-25T18:32:36+08:00">
-                2014-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>为了使用hadoop2.5.1,花费了n多时间，最后还是改用了hadoop1.2.1</p>
-<p>原因在于，似乎没有hadoop2.x的中文文档（囧..），只找到了一个1.0.4的doc，hadoop2.x和hadoop1.x的差别很大，貌似还是由不同的组织进行维护的，发现1.0.4的wordcount V2.0在安装2.5.1不能运行后，果断安装了一个hadoop1.2.1..</p>
-<p>安装1.2.1用的是rpm包</p>
-<p>不同于直接解压.tar.gz，用rpm安装的话，hadoop的一些文件的位置是变化了的，譬如，启动关闭dfs或者mapreduce的.sh脚本默认放在了/usr/sbin目录下，hadoop的配置文件如hadoop-env.xml、hdfs-sites.xml的都放在了/etc/hadoop目录下，而hadoop安装在了/usr/share/hadoop下</p>
-<p>安装并配置完毕后，开始运行wordcount，出现了“There is insufficient memory for the Java Runtime Environment to continue”这个错误，调试了很久，最后还是含泪加了我的阿里云ECS的内存，从1G升级到2G，重启，果断那个错误消失了..</p>
-<p>一阵学习中..</p>
-<p>看了<a href="http://hadoop.apache.org/docs/r1.0.4/cn/cluster_setup.html后，突然想了解下hadoop的启动过程" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/cluster_setup.html后，突然想了解下hadoop的启动过程</a>..</p>
-<p>从start-dfs.sh到hadoop-daemons.sh再到slaves.sh，发现了</p>
-<p>ssh $HADOOP_SSH_OPTS $slave $”${@// /\ }” 2&gt;&amp;1 | sed “s/^/$slave: /“ &amp;</p>
-<p>这句，看来应该是nameNode主机通过ssh远程在dataNode主机执行命令完成启动dataNode的hadoop的..</p>
-<p>对于linux的sed的使用不是很熟悉，想以后该学习下..</p>
-<p>但$”${@// /\ }”这句，我始终不太懂..特别是类似${var/ /}的用法..</p>
-<p>google了一下，详见另一篇文件&lt;shell学习之2014.11.25&gt;..</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1606,7 +1597,7 @@ print(&quot;exit..&quot;)
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1619,7 +1610,7 @@ print(&quot;exit..&quot;)
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

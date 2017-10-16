@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -73,6 +73,7 @@
 <meta property="og:title" content="My 窝">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="My 窝">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="My 窝">
 
@@ -122,7 +123,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -204,6 +205,126 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My 窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/test/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-16T23:38:55+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>测试一下</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1345,126 +1466,6 @@ with self.wrap_database_errors:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/19/安装gitbook小记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My 窝">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/19/安装gitbook小记/" itemprop="url">安装gitbook小记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-19T20:01:07+08:00">
-                2017-01-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>看<a href="https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html" target="_blank" rel="external">小程序文档</a>时，发现文档是使用<a href="https://www.gitbook.com/" target="_blank" rel="external">gitbook</a>生成的，很喜欢这种风格的页面，于是尝试着在自己的服务器上也搭建一个。<br>从<a href="http://www.chengweiyang.cn/gitbook/gitbook.com/README.html" target="_blank" rel="external">这里</a>，首先在服务器上安装npm，使用命令yum install npm，能找到安装包，可是总在安装过程中被莫名杀死。<br>于是尝试着下载nodejs安装包，编译安装，同样报错被杀死<br><img src="http://dahui1990.com/wp-content/uploads/2017/01/6.jpg" alt="6">然后尝试下载编译好的程序，解压时报错<br><img src="http://dahui1990.com/wp-content/uploads/2017/01/5.jpg" alt="5">终于发现是服务器的内存问题。。<br><img src="http://dahui1990.com/wp-content/uploads/2017/01/3.jpg" alt="3">可用内存不足100MB<br>然后发现<br><img src="http://dahui1990.com/wp-content/uploads/2017/01/1.jpg" alt="1">23个php-fpm进程占据了将近70%的内存。<br>我是使用的阿里云的云服务器，内存只买了1G的，包括这个wordpress博客，mysql数据库，一些自己弄着玩的程序都跑在这台服务器上。php-fpm使用的是默认的配置，结果造成内存使用率过高。<br>而实际上，我的博客的访问量并不算大(可以说很小。)，于是，更改php-fpm配置，降低其工作进程数，重启后<br><img src="http://dahui1990.com/wp-content/uploads/2017/01/2.jpg" alt="2">然后使用yum install npm，终于安装了npm..<br>接下来按部就班。。<br>请见第一个<a href="http://dahui1990.com:4000/" target="_blank" rel="external">book</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1514,7 +1515,7 @@ with self.wrap_database_errors:
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1527,7 +1528,7 @@ with self.wrap_database_errors:
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
