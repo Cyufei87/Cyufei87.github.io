@@ -222,6 +222,317 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/06/http请求阻塞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/06/http请求阻塞/" itemprop="url">http请求阻塞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-06T13:45:39+08:00">
+                2015-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天发现前几天写的一个定时爬虫程序，突然无故暂停了。</p>
+<p>程序用了python定时框架apscheduler，我加了28个Job，其中有3个job出现了异常。</p>
+<p>查看日志，发现是某一次的job执行似乎是停住了，而job的最大同时运行实例数为1，所以下一次的任务执行也就跳了过去（程序定时每半小时运行一次）。导致之后差不到两天的数据没能抓取到。</p>
+<p>查看代码，感觉像调用urllib2.urlopen时，程序得不到回应，所以停住了。</p>
+<p>于是运行</p>
+<p><code>ps -eLo user,pid,ppid,pgid,nlwp,lwp,sess,start_time,command,wchan|grep write_AQM</code></p>
+<p>得到结果如下：</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150820.jpg" alt="QQ图片20150206150820"></p>
+<p>可以看到正好有3个lwp的wchan是sk_wait_data</p>
+<p>再次运行</p>
+<p><code>strace -p pid</code></p>
+<p>其中pid为那3个lwp的id，得到</p>
+<p><img src="http://182.92.214.184/wp-content/uploads/2015/02/QQ图片20150206150908.jpg" alt="QQ图片20150206150908"></p>
+<p>由此，基本可以确定程序在进行http请求时，一直得不到响应，就阻塞在了那里。</p>
+<p>解决方法很简单，在调用urllib2.urlopen时，多传一个参数timeout，如timeout=10。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/10/Fortran-netCDF-library安装记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/10/Fortran-netCDF-library安装记/" itemprop="url">Fortran netCDF library安装记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-10T18:32:00+08:00">
+                2014-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>帮一个朋友安装国内某名校某人写的一个fortran程序</p>
+<p>此程序主要用到了netcdf库.</p>
+<p>最开始运行make，报undefined reference to `netcdf_mp_nf90_get_att_one<em>fourbytereal</em>‘之类的错，经网上一顿搜索，问题定位在fortran编译器没有链接到netCDF Fortran库..</p>
+<p>查看Makefile，加上-lnetcdff，报没有libnetcdff.so..</p>
+<p>开始艰难的编译Fortran netCDF library..</p>
+<p>IBM CRL的网络一如既往的不给力..幸好的是..其中的yellowzone区域的网络还是很给力的的..</p>
+<p>安装Fortran netCDF library需要C netCDF library，安装C netCDF library的过程中又缺少了hdf5库..</p>
+<p>下载hdf5源码包..安装..</p>
+<p>之前有安装过C netCDF library，除了make check了一晚上还没结束..一切还是比较顺利的..</p>
+<p>安装Fortran netCDF library是比较痛苦的，中间几乎有想放弃的时候.</p>
+<p>1.系统自带的fortran编译器gfortran版本过低，configure的时候就一直出问题,换成了gfortran44..</p>
+<p>2.用gfortran44配置时，同时需要设置环境变量CC，指向之前编译C库的C编译器，如/usr/bin/gcc..</p>
+<p>3.configure通过，但make时一直报莫名奇妙的错误,DHAVE_CONFIG_H: Command not found或者g: Command not found..经过一阵煎熬..折腾..把gfortran44 mv到gfortran(之前用gfrtran44编译是设置的环境变量FC)，勉强make成功..</p>
+<p>4.这下有了libnetcdff.so，但仍然报undefined reference to `netcdf_mp_nf90_get_att_one<em>fourbytereal</em>‘，用nm命令查看libnetcdff.so，只发现了netcdf_MOD_nf90_get_att_one_fourbytereal..改变Makefile脚本，设置FC为gfortran(之前是mpif90 -f90=ifort)，但出现了其他的错..考虑用ifort编译Fortran netCDF..编译成功..并把FC设置为ifort..make成功…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/03/db2学习之2014-12-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1459,7 +1770,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1481,7 +1792,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

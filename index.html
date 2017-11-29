@@ -222,7 +222,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/28/Python-2-vs-Python-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/Python的闭包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
@@ -241,7 +241,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/28/Python-2-vs-Python-3/" itemprop="url">Python 3 vs Python 2</a></h1>
+                <a class="post-title-link" href="/2017/11/29/Python的闭包/" itemprop="url">Python的闭包</a></h1>
         
 
         <div class="post-meta">
@@ -253,8 +253,166 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-28T14:24:15+08:00">
-                2017-10-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T14:53:42+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>来自<a href="https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_%28%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%29" target="_blank" rel="external">维基百科</a>：</p>
+<blockquote>
+<p>在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。</p>
+</blockquote>
+<p><strong>Python的闭包的环境信息保存在函数对象的属性__closure__中</strong><br>测试代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">global_var = <span class="number">100</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add1</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">return</span> global_var + a + b</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_one</span><span class="params">(b)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">real_add</span><span class="params">(a)</span>:</span></div><div class="line">        <span class="keyword">return</span> global_var + a + b</div><div class="line">    <span class="keyword">return</span> real_add</div><div class="line">add2 = add_one(<span class="number">2</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_one_default</span><span class="params">(default_b)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">real_add_default</span><span class="params">(a, b=default_b)</span>:</span></div><div class="line">        <span class="keyword">return</span> global_var + a + b</div><div class="line">    <span class="keyword">return</span> real_add_default</div><div class="line">add3 = add_one_default(<span class="number">3</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_global_deco</span><span class="params">(func)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_func</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> func(*args, **kwargs) + global_var</div><div class="line">    <span class="keyword">return</span> _func</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@add_global_deco</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add4</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">return</span> a + b</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    print(<span class="string">"add1.__closure__ is %s"</span> % repr(add1.__closure__))</div><div class="line">    <span class="comment"># add1.__closure__ is None</span></div><div class="line">    print(<span class="string">"add2.__closure__ is %s"</span> % repr(add2.__closure__))</div><div class="line">    <span class="comment"># add2.__closure__ is (&lt;cell at 0x10437a7f8: int object at 0x7fea2e605460&gt;,)</span></div><div class="line">    print(<span class="string">"add3.__closure__ is %s"</span> % repr(add3.__closure__))</div><div class="line">    <span class="comment"># add3.__closure__ is None</span></div><div class="line">    print(<span class="string">"add4.__closure__ is %s"</span> % repr(add4.__closure__))</div><div class="line">    <span class="comment"># add4.__closure__ is (&lt;cell at 0x10437a830: function object at 0x104377578&gt;,)</span></div></pre></td></tr></table></figure></p>
+<p>可以看出add2、add4是闭包，add1、add3不是</p>
+<p><strong>在嵌套函数中，子函数只有引用了locals()中的自由变量才能成为闭包</strong><br>Python关于自由变量的<a href="https://docs.python.org/2/reference/executionmodel.html" target="_blank" rel="external">文档</a>：</p>
+<blockquote>
+<p>If a name is bound in a block, it is a local variable of that block. If a name is bound at the module level, it is a global variable. (The variables of the module code block are local and global.) If a variable is used in a code block but not defined there, it is a free variable.</p>
+</blockquote>
+<p>Python关于locals()的<a href="https://docs.python.org/2/library/functions.html#locals" target="_blank" rel="external">文档</a>：</p>
+<blockquote>
+<p>Update and return a dictionary representing the current local symbol table. Free variables are returned by locals() when it is called in function blocks, but not in class blocks.</p>
+</blockquote>
+<p>注：这里有歧义，按照自由变量的定义，全局变量也应该属于自由变量。但是，全局变量并不会通过locals()返回，而是通过globals()返回</p>
+<p>add1在locals()没有自由变量，所以不能形成闭包<br>add2有自由变量b，所以形成闭包<br>add3在函数定义中引用了default_b，但是在执行中并未用到（这里的b是局部变量），所以也不能形成闭包<br>add4是装饰器形式的闭包，这里的自由变量是被装饰的函数add4，所以形成闭包</p>
+<p>参考：<br><a href="https://gist.github.com/DmitrySoshnikov/700292" target="_blank" rel="external">Understanding Python’s closures</a><br><a href="http://mathamy.com/python-closures-and-free-variables.html" target="_blank" rel="external">Python Closures and Free Variables</a><br><a href="https://segmentfault.com/a/1190000004461404" target="_blank" rel="external">Python 的闭包和装饰器</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/18/Python-2-vs-Python-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/18/Python-2-vs-Python-3/" itemprop="url">Python 3 vs Python 2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-18T14:24:15+08:00">
+                2017-11-18
               </time>
             
 
@@ -387,7 +545,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Python多进程写文件时的一些探究/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/Python多进程写文件时的一些探究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
@@ -406,7 +564,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/10/Python多进程写文件时的一些探究/" itemprop="url">Python多进程写文件时的一些探究</a></h1>
+                <a class="post-title-link" href="/2017/10/27/Python多进程写文件时的一些探究/" itemprop="url">Python多进程写文件时的一些探究</a></h1>
         
 
         <div class="post-meta">
@@ -418,8 +576,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T20:48:41+08:00">
-                2017-10-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-27T20:48:41+08:00">
+                2017-10-27
               </time>
             
 
@@ -549,6 +707,148 @@
 <p>The new I/O spec is intended to be similar to the Java I/O libraries, but generally less confusing.</p>
 </blockquote>
 <p>看来Java对I/O的处理更加类似Python 3</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/12/一些不错的openstack学习资料/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/12/一些不错的openstack学习资料/" itemprop="url">一些不错的OpenStack学习资料</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T19:58:14+08:00">
+                2017-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Keystone：<a href="http://blog.csdn.net/hejin_some/article/details/58066427" target="_blank" rel="external">OpenStack组件 — Keystone认证功能实现原理</a><br>nova-api的WSGI：<a href="http://wsfdl.com/openstack/2013/10/18/%E7%90%86%E8%A7%A3nova-api%E7%9A%84WSGI%E6%A1%86%E6%9E%B6.html" target="_blank" rel="external">深入理解 nova-api 的 WSGI</a><br>Nova创建虚拟机整体流程：<a href="https://blog.apporc.org/2016/04/nova-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%B5%81%E7%A8%8B/" target="_blank" rel="external">nova: 创建虚拟机流程</a></p>
 
           
         
@@ -1450,291 +1750,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/09/LeetCode-Solutions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/09/LeetCode-Solutions/" itemprop="url">LeetCode_Solutions</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-09T17:55:23+08:00">
-                2017-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以后代码都放这里了<a href="https://github.com/Cyufei87/LeetCode_Solutions" target="_blank" rel="external">LeetCode_Solutions</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/17/MySQL学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/17/MySQL学习/" itemprop="url">MySQL学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T00:35:44+08:00">
-                2017-02-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先推荐三篇文章：<br>1.<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a><br>总体概括了MySQL内部的索引原理及索引使用策略<br>2.<a href="http://blog.csdn.net/voidccc/article/details/40077329" target="_blank" rel="external">剖析Mysql的InnoDB索引</a><br>侧重剖析了InnoDB的Page结构，更加详细的见Jeremy Cole的<a href="https://blog.jcole.us/innodb/" target="_blank" rel="external">博客</a><br>3.Judy的<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.02.md" target="_blank" rel="external">B树</a><br>侧重数据结构的分析，注意只是数据结构。。<br>此外还有官方的<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-storage-engine.html" target="_blank" rel="external">InnoDB文档</a></p>
-<p>总结重要的内容如下：<br>1. 使用B+的原因，相对于红黑树等二叉查找树，树的高度低，能减少IO次数。相对于B-树，稳定，更利于范围查询。相对于Hash表，更利于范围查询，伸缩性更好（在无法预知表中记录数时），详细见<a href="http://stackoverflow.com/questions/7306316/b-tree-vs-hash-table" target="_blank" rel="external">这里的讨论</a><br>2. InnoDB与MyISAM索引实现的区别，聚集索引和非聚集索引的区别<br>3. 建索引时的最左前缀原理，数据库表的主键选择<br>4. 慢查询日志及explain关键字</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1788,7 +1803,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1810,7 +1825,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

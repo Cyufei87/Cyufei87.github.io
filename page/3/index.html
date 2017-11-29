@@ -222,6 +222,328 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/19/pretty-print/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/19/pretty-print/" itemprop="url">pretty_print</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-19T18:43:49+08:00">
+                2016-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看<br><a href="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" alt="b1"></a><br><code>def pretty_print(obj):
+    def _pretty_str(obj):
+        pstr = &quot;&quot;
+        if isinstance(obj, dict):
+            pstr += &quot;{&quot;
+            first_ele = True
+            for k, v in obj.iteritems():
+                if first_ele:
+                    first_ele = False
+                else:
+                    pstr += &quot;, &quot;
+                pstr += _pretty_str(k) + &quot;:&quot; + _pretty_str(v)
+            pstr += &quot;}&quot;
+        elif isinstance(obj, (list, set, tuple)):
+            if isinstance(obj, list):
+                left, right = &quot;[&quot;, &quot;]&quot;
+            elif isinstance(obj, set):
+                left, right = &quot;{&quot;, &quot;}&quot;
+            elif isinstance(obj, tuple):
+                left, right = &quot;(&quot;, &quot;)&quot;
+            pstr += left
+            first_ele = True
+            for v in obj:
+                if first_ele:
+                    first_ele = False
+                else:
+                    pstr += &quot;, &quot;
+                pstr += _pretty_str(v)
+            pstr += right
+        elif isinstance(obj, basestring):
+            pstr = &#39;&quot;%s&quot;&#39; % str(obj)
+        else:
+            pstr = str(obj)
+        return pstr
+    print(_pretty_str(obj))</code><br>于是乎写了这个函数，效果如下：<br><a href="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" alt="b2"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/24/读三体有感-立足当下/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/24/读三体有感-立足当下/" itemprop="url">读三体有感--立足当下</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-24T10:49:08+08:00">
+                2016-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>读《三体》，每每读到人类态度在情势改变而发生近乎可笑的变化时，心里也总会有“小说就是小说”的感觉，但想到最近房价的疯长，结合过去一年股市的动荡，在房地长和股市面前，大众是不是很类似三体中的普遍的人类呢</p>
+<p>三体中人类态度的180度大转弯肯定是有些不太合适的，和真实世界也是不同的。</p>
+<p>但是在时局改变时，你又能做什么呢，谁又能预料未来呢？未来的未来呢？</p>
+<p>也许立足当下不是最优的选择，但应该不是一个坏的选择。</p>
+<p>（突然想到了动态规划和贪心算法。。汗。）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/27/关于一致性Hash的一些思考/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1395,299 +1717,6 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/20/定制bootstrap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/20/定制bootstrap/" itemprop="url">定制bootstrap</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-20T16:28:19+08:00">
-                2015-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://v3.bootcss.com/" target="_blank" rel="external">Bootstrap</a>是Twitter推出的一个用于前端开发的开源工具包，如果直接使用bootstrap编译好的css文件，许多样式，如全局字体大小，表单的内边距都是固定的，但也许其中的部分内容是你想要改变的，特别对追求完美的开发者而言…</p>
-<p>偶然的机遇，学习了下bootstrap的定制功能。</p>
-<p>bootstrap本身使用<a href="http://www.ibm.com/developerworks/cn/web/1207_zhaoch_lesscss/" target="_blank" rel="external">Less</a>进行编写，使用<a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a>作为编译系统，而Grunt是基于<a href="http://zh.wikipedia.org/wiki/Node.js" target="_blank" rel="external">Node.js</a>的，因此，首先需要安装Node.js，之后用npm来安装Grunt，然后下载bootstrap的源码，再用npm安装某些编译bootstrap依赖的扩展包即可，详见<a href="http://v3.bootcss.com/getting-started/#grunt" target="_blank" rel="external">这里</a>。</p>
-<p>在bootstap的根目录，当你运行grunt时，会自动执行Gruntfile.js，根据参数的不同，会执行到Gruntfile.js的不同部分。当执行<span style="background-color: #eee;">grunt dist</span>时，Gruntfile.js会自动运行less/bootstrap.less，less/bootstrap.less导入并执行其他less文件，完成css文件的生成。</p>
-<p>如果我们要定制bootstrap，当然主要是修改less文件了。在众多less文件中，less/variables.less定义了less用到的众多变量，这个也是主要修改的文件。</p>
-<p>其实，<a href="http://v3.bootcss.com/customize/" target="_blank" rel="external">这里</a>提供了一个很简单来定制的方法，大概原理也是如上所介绍吧…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/19/眼界与成长/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/19/眼界与成长/" itemprop="url">眼界与成长</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-19T20:58:00+08:00">
-                2015-05-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
-                    <span itemprop="name">生活杂想</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上级让设计一个内部管理系统的整体界面，想到借鉴一些网站的设计。开始时，在百度搜，在google搜，始终没有找到如意的整体样式，最终还是选择了一个现有系统的样式，仅是做了简单修改。</p>
-<p>几天后，偶然间，搜到了一些比较如意的样式。简单总结了下前后得到不同结果的原因：<br>１.搜索的关键字不对，之前搜bootstrap theme，之后是bootstrap admin，搜索的精确度提高了许多<br>２.某些模板需要收费，貌似是点击不进去了，但实际上是可以进去的</p>
-<p>更深入的体会是，在看到了那些比较喜欢的样式后，感觉自己对网页ui的理解也深了一个层次，推而广之，当你看的优秀的东西多了时，自己也会不自觉的变得更加优秀。<br>很早就有类似的感受，城市的孩子比农村的孩子，好大学比差点的大学，发达的国家比落后的国家，之所以好的原因很大程度上也在与氛围与环境吧。<br>见的多了，看的优秀的东西/方法多了，就会成长</p>
-<p>从一个“差”的地方到一个“好”的地方，跨度越大，需要学习的东西也就越多，也会对一个人产生越大的焦虑，跨度超过了这个人的承受范围，这个人也许就会产生自卑，颓唐。当他习惯了这个“好”的地方，”好”会变得平庸，这时，如果要成长，就需要看到进一步“好”的东西<br>同时，学习会带来焦虑，这也意味着成长会伴着痛苦；如果不成长，痛苦也许就会少的多<br>如果不成长，一个人会是什么样呢？一辈子做同样工作的人？一个所谓的傻子，疯子？<br>也许快乐学习是最好的，但快乐学习的速度呢，能做到的人又有多少呢？</p>
-<p>也许积极乐观是我们能做到的，同时不断寻找与学习符合自己状况的“好”的东西。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1741,7 +1770,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1763,7 +1792,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

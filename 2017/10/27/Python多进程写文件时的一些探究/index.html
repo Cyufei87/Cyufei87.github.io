@@ -73,11 +73,11 @@
 <meta name="keywords" content="Python,多进程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python多进程写文件时的一些探究">
-<meta property="og:url" content="http://yoursite.com/2017/10/10/Python多进程写文件时的一些探究/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/Python多进程写文件时的一些探究/index.html">
 <meta property="og:site_name" content="zhaohui&#39;s 小站">
 <meta property="og:description" content="问题提出在没有并发控制的情况下，Python多进程向同一个文件写数据(限制单次写入数据大小)是安全的吗？这里的安全是指：  不会有进程的日志丢失（被覆盖） 两次写入的数据不会相互混着输出（譬如A进程单次写入aaaa，B进程写入bbbb，最后的日志不会出现aaababbb）  测试首先，我做了四个测试，测试代码如下(test.py)：123456789101112131415161718192021">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-29T04:25:07.685Z">
+<meta property="og:updated_time" content="2017-11-29T12:03:11.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python多进程写文件时的一些探究">
 <meta name="twitter:description" content="问题提出在没有并发控制的情况下，Python多进程向同一个文件写数据(限制单次写入数据大小)是安全的吗？这里的安全是指：  不会有进程的日志丢失（被覆盖） 两次写入的数据不会相互混着输出（譬如A进程单次写入aaaa，B进程写入bbbb，最后的日志不会出现aaababbb）  测试首先，我做了四个测试，测试代码如下(test.py)：123456789101112131415161718192021">
@@ -110,7 +110,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/10/Python多进程写文件时的一些探究/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/27/Python多进程写文件时的一些探究/"/>
 
 
 
@@ -223,7 +223,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Python多进程写文件时的一些探究/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/Python多进程写文件时的一些探究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
@@ -252,8 +252,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T20:48:41+08:00">
-                2017-10-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-27T20:48:41+08:00">
+                2017-10-27
               </time>
             
 
@@ -413,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/30/关于时间的一些杂想/" rel="next" title="关于时间的一些杂想">
-                <i class="fa fa-chevron-left"></i> 关于时间的一些杂想
+              <a href="/2017/10/12/一些不错的openstack学习资料/" rel="next" title="一些不错的OpenStack学习资料">
+                <i class="fa fa-chevron-left"></i> 一些不错的OpenStack学习资料
               </a>
             
           </div>
@@ -423,7 +423,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/28/Python-2-vs-Python-3/" rel="prev" title="Python 3 vs Python 2">
+              <a href="/2017/11/18/Python-2-vs-Python-3/" rel="prev" title="Python 3 vs Python 2">
                 Python 3 vs Python 2 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -505,7 +505,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -527,7 +527,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
