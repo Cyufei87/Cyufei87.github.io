@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术探索," />
+  <meta name="keywords" content="redis," />
 
 
 
@@ -70,14 +70,14 @@
 
 
 <meta name="description" content="助我夺宝需求描述如下：1.用户可以助威好友2.用户按照助威数和最后一个助威的时间排名3.排名特定区间的用户可以获得奖品，如排名1-3获得奖品一，排名4-8可以获得奖品二，等等4.实时获取用户当前排名，以及距离下一区间奖品需要的助威数 问题的难点在于用户的排名是不断变化中的，利用redis的Sorted Set却可以比较好的完成这项需求 首先可以用关系型数据库mysql存储prize表 – 奖品信息">
-<meta name="keywords" content="技术探索">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用redis的Sorted Set解决“助我夺宝”">
 <meta property="og:url" content="http://yoursite.com/2017/03/16/使用redis的Sorted-Set解决“助我夺宝”/index.html">
 <meta property="og:site_name" content="zhaohui&#39;s 小站">
 <meta property="og:description" content="助我夺宝需求描述如下：1.用户可以助威好友2.用户按照助威数和最后一个助威的时间排名3.排名特定区间的用户可以获得奖品，如排名1-3获得奖品一，排名4-8可以获得奖品二，等等4.实时获取用户当前排名，以及距离下一区间奖品需要的助威数 问题的难点在于用户的排名是不断变化中的，利用redis的Sorted Set却可以比较好的完成这项需求 首先可以用关系型数据库mysql存储prize表 – 奖品信息">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-25T17:38:18.000Z">
+<meta property="og:updated_time" content="2017-11-26T11:39:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用redis的Sorted Set解决“助我夺宝”">
 <meta name="twitter:description" content="助我夺宝需求描述如下：1.用户可以助威好友2.用户按照助威数和最后一个助威的时间排名3.排名特定区间的用户可以获得奖品，如排名1-3获得奖品一，排名4-8可以获得奖品二，等等4.实时获取用户当前排名，以及距离下一区间奖品需要的助威数 问题的难点在于用户的排名是不断变化中的，利用redis的Sorted Set却可以比较好的完成这项需求 首先可以用关系型数据库mysql存储prize表 – 奖品信息">
@@ -228,7 +228,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -262,6 +262,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -313,7 +335,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术探索/" rel="tag"># 技术探索</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -394,6 +416,10 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -405,22 +431,31 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

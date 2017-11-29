@@ -222,12 +222,387 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/28/Python-2-vs-Python-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/28/Python-2-vs-Python-3/" itemprop="url">Python 3 vs Python 2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-28T14:24:15+08:00">
+                2017-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>虽然Python 3早在2008年就发布了，但是似乎Python 3的使用率仍然不高(<a href="https://twitter.com/pycharm/status/865659029460209664" target="_blank" rel="external">来自PyCharm的一个统计</a>)。本文将在四个方面对Python 2和Python 3进行对比。</p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>这个大概是许多Python 2用户不愿意转向Python 3的最重要原因。但是根据<a href="http://py3readiness.org/" target="_blank" rel="external">py3readiness</a>的数据，将近96%的使用最多的Python包已经支持了Python 3。<br>而根据<a href="https://www.python.org/dev/peps/pep-0373/" target="_blank" rel="external">PEP 373</a>，Python 2将于2020年停止维护。<a href="http://www.python3statement.org/" target="_blank" rel="external">许多流行的Python项目也声明将于2020年以前停止对Python 2的支持</a>。<br>Python最流行的Web框架Django也声明了，<a href="https://docs.djangoproject.com/en/dev/faq/install/#what-python-version-should-i-use-with-django" target="_blank" rel="external">Django1.11将是最后一个支持Python 2的版本</a>。</p>
+<h3 id="Python-3的新特性-截止到Python-3-6"><a href="#Python-3的新特性-截止到Python-3-6" class="headerlink" title="Python 3的新特性(截止到Python 3.6)"></a>Python 3的新特性(截止到Python 3.6)</h3><p>这里简述几个比较重要的</p>
+<ol>
+<li>类型注解。它允许你给函数增加一些说明的信息</li>
+<li>标准库asyncio提供了内置的异步IO支持。不再需要gevent，tornado等第三方库</li>
+<li>lazy化。许多函数例如range，map，dict.keys不再直接返回list，而是返回一个可迭代对象</li>
+<li>更清晰明确的字符串表示。str表示Unicode字符串，bytes表示二进制数据</li>
+</ol>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p><a href="https://speakerdeck.com/playpauseandstop/python-3-dot-6-and-performance-a-love-story" target="_blank" rel="external">PyCon2017有一个关于Python 3.6性能的分享</a>，得出的结论如下：</p>
+<blockquote>
+<p>Python 2.7 is still fastest Python<br>Python 3.5 much faster Python 3.4<br>Python 3.6 faster Python 3.5<br>Python 3.7 has some significant improvements already</p>
+</blockquote>
+<p><a href="https://speed.python.org/comparison/?exe=12%2BL%2B3.6%2C12%2BL%2B2.7&amp;ben=616%2C617%2C618%2C619%2C620%2C621%2C622%2C623%2C624%2C625%2C626%2C627%2C628%2C629%2C630%2C631%2C632%2C680%2C633%2C634%2C635%2C636%2C637%2C638%2C639%2C640%2C641%2C642%2C643%2C644%2C645%2C646%2C647%2C648%2C681%2C649%2C650%2C651%2C652%2C653%2C654%2C655%2C656%2C657%2C658%2C659%2C660%2C661%2C682%2C662%2C663%2C664%2C665%2C666%2C667%2C669%2C668%2C670%2C671%2C672%2C673%2C674%2C675%2C678%2C677%2C676%2C679&amp;env=1&amp;hor=false&amp;bas=12%2BL%2B2.7&amp;chart=normal+bars" target="_blank" rel="external">这里</a>是最新Python 2.7和Python 3.6在各个基准测试上的结果，<a href="http://pyperformance.readthedocs.io/benchmarks.html#available-benchmarks" target="_blank" rel="external">这里</a>是不同测试的一些说明<br>分享截图如下(写本篇文章时的数据)：<br><img src="/images/python_speed.jpg" alt=""><br>可以看出，除了python_startup，python_startup_no_site，unpickle_pure_python三个测试的数据上，Python 3.6的性能要远远落后Python 2.7以外，其他所有的测试Python 3.6仅落后Python 2.7很少，或者相对于Python 2.7的性能有所提升</p>
+<h3 id="学习成本"><a href="#学习成本" class="headerlink" title="学习成本"></a>学习成本</h3><p>不可否认，大多数关于Python的学习资料还是Python 2的，网络上各个技术论坛或技术网站涉及到Python的内容大多也是指Python 2。<br>但是另一方面，Python 3虽然增加了不少新特性，但绝大多数Python 2的问题解决方案或文档也是适用于Python 3的，而且Python 2.7作为一个过渡版本，也启到了一定的作用。而且可以预料，关于Python 3的资料会越来越多。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li>有一个反对使用Python 3的文章<a href="https://learnpythonthehardway.org/book/nopython3.html" target="_blank" rel="external">The Case Against Python 3</a>及对它的<a href="https://eev.ee/blog/2016/11/23/a-rebuttal-for-python-3/" target="_blank" rel="external">反驳</a></li>
+<li><a href="http://python.jobbole.com/87814/" target="_blank" rel="external">PyCon2017上分享的Instagram为何和如何迁移到Python 3</a>(<a href="https://www.youtube.com/watch?v=66XoCk79kjM" target="_blank" rel="external">YouTube上的视频</a>)</li>
+</ol>
+<h3 id="我的看法"><a href="#我的看法" class="headerlink" title="我的看法"></a>我的看法</h3><ul>
+<li>未来是Python 3的</li>
+<li>新项目可以完全使用Python 3，老的项目可以根据项目的状况选择是否迁移到Python 3</li>
+<li>就学习Python而言，因为大部分的资料仍然是Python 2的，可以根据自己的计算机基础选择Python 2或者Python 3，比选择更重要的是踏实学和实践</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Python多进程写文件时的一些探究/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/10/Python多进程写文件时的一些探究/" itemprop="url">Python多进程写文件时的一些探究</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T20:48:41+08:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h3><p>在没有并发控制的情况下，Python多进程向同一个文件写数据(限制单次写入数据大小)是安全的吗？<br>这里的安全是指：</p>
+<ol>
+<li>不会有进程的日志丢失（被覆盖）</li>
+<li>两次写入的数据不会相互混着输出（譬如A进程单次写入aaaa，B进程写入bbbb，最后的日志不会出现aaababbb）</li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>首先，我做了四个测试，测试代码如下(test.py)：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBase</span><span class="params">(object)</span>:</span></div><div class="line">    buffering = <span class="number">-1</span></div><div class="line">    test_filename = <span class="keyword">None</span></div><div class="line">    f = <span class="keyword">None</span></div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_file</span><span class="params">(cls)</span>:</span></div><div class="line">        <span class="keyword">assert</span> cls.test_filename <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span></div><div class="line">        cls.f = open(cls.test_filename, <span class="string">"w"</span>, buffering=cls.buffering)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test1</span><span class="params">(TestBase)</span>:</span></div><div class="line">    <span class="string">"""测试一</span></div><div class="line"><span class="string">    * buffering参数默认</span></div><div class="line"><span class="string">    * 无自定义buffer控制</span></div><div class="line"><span class="string">    * 文件在进程fork前打开</span></div><div class="line"><span class="string">    """</span></div><div class="line">    test_filename = <span class="string">'file1.tmp'</span></div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(cls, char, process)</span>:</span></div><div class="line">        start_time = time.time()</div><div class="line">        chars = <span class="string">"%s\n"</span> % (char * <span class="number">10</span>)</div><div class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(int(<span class="number">1e5</span>)):</div><div class="line">            cls.f.write(chars)</div><div class="line">        cls.f.close()</div><div class="line">        <span class="keyword">print</span> <span class="string">"%s consume %ss"</span> % (process, time.time() - start_time)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2</span><span class="params">(Test1)</span>:</span></div><div class="line">    <span class="string">"""测试二</span></div><div class="line"><span class="string">    * 设置buffering参数</span></div><div class="line"><span class="string">    * 无自定义buffer控制</span></div><div class="line"><span class="string">    * 文件在进程fork前打开</span></div><div class="line"><span class="string">    """</span></div><div class="line">    buffering = <span class="number">1024</span></div><div class="line">    test_filename = <span class="string">'file2.tmp'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span><span class="params">(TestBase)</span>:</span></div><div class="line">    <span class="string">"""测试三</span></div><div class="line"><span class="string">        * 设置buffering参数</span></div><div class="line"><span class="string">        * 自定义buffer控制</span></div><div class="line"><span class="string">        * 文件在进程fork前打开</span></div><div class="line"><span class="string">        """</span></div><div class="line">    buffering = <span class="number">1024</span></div><div class="line">    test_filename = <span class="string">'file3.tmp'</span></div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(cls, char, process)</span>:</span></div><div class="line">        buffer_size = cls.buffering</div><div class="line">        start_time = time.time()</div><div class="line">        chars = <span class="string">"%s\n"</span> % (char * <span class="number">10</span>)</div><div class="line">        buffer_used = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(int(<span class="number">1e5</span>)):</div><div class="line">            <span class="keyword">if</span> buffer_used + len(chars) &gt;= buffer_size:</div><div class="line">                cls.f.flush()</div><div class="line">                buffer_used = <span class="number">0</span></div><div class="line">            cls.f.write(chars)</div><div class="line">            buffer_used += len(chars)</div><div class="line">        cls.f.close()</div><div class="line">        <span class="keyword">print</span> <span class="string">"%s consume %ss"</span> % (process, time.time() - start_time)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test4</span><span class="params">(Test3)</span>:</span></div><div class="line">    <span class="string">"""测试四</span></div><div class="line"><span class="string">        * 设置buffering参数</span></div><div class="line"><span class="string">        * 自定义buffer控制</span></div><div class="line"><span class="string">        * 文件在进程fork后打开</span></div><div class="line"><span class="string">        """</span></div><div class="line">    test_filename = <span class="string">'file4.tmp'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    test_num = int(sys.argv[<span class="number">1</span>])</div><div class="line">    test_class_map = &#123;</div><div class="line">        <span class="number">1</span>: Test1,</div><div class="line">        <span class="number">2</span>: Test2,</div><div class="line">        <span class="number">3</span>: Test3,</div><div class="line">        <span class="number">4</span>: Test4,</div><div class="line">    &#125;</div><div class="line">    test_class = test_class_map.get(test_num)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> test_class:</div><div class="line">        sys.stderr.write(<span class="string">"unknown test_num"</span>)</div><div class="line">        sys.exit(<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 前3个测试，在fork前打开文件</span></div><div class="line">    <span class="keyword">if</span> test_num &lt;= <span class="number">3</span>:</div><div class="line">        test_class.init_file()</div><div class="line"></div><div class="line">    <span class="keyword">if</span> os.fork() == <span class="number">0</span>:  <span class="comment"># child process</span></div><div class="line">        char = <span class="string">'a'</span></div><div class="line">        process = <span class="string">'child'</span></div><div class="line">    <span class="keyword">else</span>:  <span class="comment"># parent process</span></div><div class="line">        char = <span class="string">'b'</span></div><div class="line">        process = <span class="string">'parent'</span></div><div class="line"></div><div class="line">    <span class="comment"># 第四个测试，在fork后打开文件</span></div><div class="line">    <span class="keyword">if</span> test_num == <span class="number">4</span>:</div><div class="line">        test_class.init_file()</div><div class="line">    test_class.run(char, process)</div></pre></td></tr></table></figure></p>
+<p>在都是利用os.fork实现多进程(<a href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods" target="_blank" rel="external">在Unix下，multiprocessing库默认也是使用os.fork</a>)写一个文件的情况下，四个测试主要有以下不同：</p>
+<ul>
+<li>在调用Python内建函数<a href="https://docs.python.org/2/library/functions.html#open" target="_blank" rel="external">open</a>时，是否设置buffering，默认是-1(也是Python默认值)</li>
+<li>是否有自定义buffering控制。这里的自定义buffering控制是指，上层代码检测在进行此次写入时，是否会造成缓冲区溢出(大于buffer_size)，如果溢出，先进行flush操作，再进行write操作</li>
+<li>文件是在fork前还是之后打开</li>
+</ul>
+<p>分别执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">python test.py 1</div><div class="line">python test.py 2</div><div class="line">python test.py 3</div><div class="line">python test.py 4</div></pre></td></tr></table></figure></p>
+<p>得出结果如下：<br>测试环境：MAC OS X</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">测试</th>
+<th style="text-align:center">Python 2.7.13</th>
+<th style="text-align:center">Python 3.6.2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Test1</td>
+<td style="text-align:center">无丢失发生，数据混着输出</td>
+<td style="text-align:center">正常</td>
+</tr>
+<tr>
+<td style="text-align:center">Test2</td>
+<td style="text-align:center">无丢失发生，数据混着输出</td>
+<td style="text-align:center">正常</td>
+</tr>
+<tr>
+<td style="text-align:center">Test3</td>
+<td style="text-align:center">正常</td>
+<td style="text-align:center">正常</td>
+</tr>
+<tr>
+<td style="text-align:center">Test4</td>
+<td style="text-align:center">数据丢失一半</td>
+<td style="text-align:center">数据丢失一半</td>
+</tr>
+</tbody>
+</table>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><h4 id="为什么Python-2和Python-3的结果不一样呢？"><a href="#为什么Python-2和Python-3的结果不一样呢？" class="headerlink" title="为什么Python 2和Python 3的结果不一样呢？"></a>为什么Python 2和Python 3的结果不一样呢？</h4><p>Python 3使用了New I/O(<a href="https://www.python.org/dev/peps/pep-3116/" target="_blank" rel="external">PEP 3116</a>)。而一个重要的变化是，Python 3在自己这一层实现了buffer机制。<a href="https://github.com/python/cpython/blob/2.7/Objects/fileobject.c#L1856" target="_blank" rel="external">Python 2写文件使用的是C库函数fwrite</a>，而buffer机制完全依靠fwrite。<a href="https://github.com/python/cpython/blob/3.6/Python/fileutils.c#L1268" target="_blank" rel="external">Python 3使用的是write系统调用</a>，buffer机制是自己实现的</p>
+<h4 id="为什么在Python-2中，Test3是正常的呢？"><a href="#为什么在Python-2中，Test3是正常的呢？" class="headerlink" title="为什么在Python 2中，Test3是正常的呢？"></a>为什么在Python 2中，Test3是正常的呢？</h4><p>这个推断是在buffer满时，fwrite的处理是不能保证多进程安全的。而在上层代码强制flush的情况下，能保证数据正常写入文件</p>
+<h4 id="为什么在fork之后打开文件时，数据会丢失呢？"><a href="#为什么在fork之后打开文件时，数据会丢失呢？" class="headerlink" title="为什么在fork之后打开文件时，数据会丢失呢？"></a>为什么在fork之后打开文件时，数据会丢失呢？</h4><p>这个和fork操作对每个文件的current stream position(即调用tell方法返回的)的处理有关，参考<a href="http://blog.csdn.net/u011508527/article/details/46878205" target="_blank" rel="external">这里</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="Nginx的ngx-http-log-module模块的I-O处理"><a href="#Nginx的ngx-http-log-module模块的I-O处理" class="headerlink" title="Nginx的ngx_http_log_module模块的I/O处理"></a>Nginx的ngx_http_log_module模块的I/O处理</h4><p>根据<a href="http://nginx.org/en/docs/http/ngx_http_log_module.html#open_log_file_cache" target="_blank" rel="external">文档</a>，说明了在启用buffering时，写入文件的时机：</p>
+<blockquote>
+<p>When buffering is enabled, the data will be written to the file:<br>if the next log line does not fit into the buffer;<br>if the buffered data is older than specified by the flush parameter (1.3.10, 1.2.7);<br>when a worker process is re-opening log files or is shutting down.</p>
+</blockquote>
+<p>根据<a href="https://github.com/phusion/nginx/blob/stable-1.2/src/os/unix/ngx_files.c#L68" target="_blank" rel="external">这儿的源代码</a>，Nginx会根据NGX_HAVE_PWRITE宏的设置，使用pwrite或者write</p>
+<h4 id="关于fwrite，write，pwrite的一些讨论："><a href="#关于fwrite，write，pwrite的一些讨论：" class="headerlink" title="关于fwrite，write，pwrite的一些讨论："></a>关于fwrite，write，pwrite的一些讨论：</h4><ol>
+<li><a href="https://linux.die.net/man/3/pwrite" target="_blank" rel="external">pwrite(3) - Linux man page</a></li>
+<li><a href="https://stackoverflow.com/questions/7592822/what-are-the-advantages-of-pwrite-and-pread-over-fwrite-and-fread" target="_blank" rel="external">What are the advantages of pwrite and pread over fwrite and fread?</a></li>
+<li><a href="http://tsecer.blog.163.com/blog/static/1501817201311284223689/" target="_blank" rel="external">linux下多进程写入文件的原子性</a></li>
+</ol>
+<p>引用1</p>
+<blockquote>
+<p>Atomic/non-atomic: A write is atomic if the whole amount written in one operation is not interleaved with data from any other process. This is useful when there are multiple writers sending data to a single reader. Applications need to know how large a write request can be expected to be performed atomically. This maximum is called {PIPE_BUF}. This volume of IEEE Std 1003.1-2001 does not say whether write requests for more than {PIPE_BUF} bytes are atomic, but requires that writes of {PIPE_BUF} or fewer bytes shall be atomic.</p>
+</blockquote>
+<p>及根据2，可知在写入少于{PIPE_BUF}bytes的数据时，write及pwrite系统调用应该是原子的<br>而fwrite相对于write/pwrite有内置buffering，在没有自定义buffering的情况下，能很大的提升写文件的性能</p>
+<h4 id="Python的logging模块"><a href="#Python的logging模块" class="headerlink" title="Python的logging模块"></a>Python的logging模块</h4><p>logging模块的FileHandler也是采用的open函数，在多进程情况下，也符合以上讨论</p>
+<h4 id="Java的I-O处理"><a href="#Java的I-O处理" class="headerlink" title="Java的I/O处理"></a>Java的I/O处理</h4><p>跟据<a href="https://www.python.org/dev/peps/pep-3116/" target="_blank" rel="external">PEP 3116</a>中的描述</p>
+<blockquote>
+<p>The new I/O spec is intended to be similar to the Java I/O libraries, but generally less confusing.</p>
+</blockquote>
+<p>看来Java对I/O的处理更加类似Python 3</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/30/关于时间的一些杂想/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -264,6 +639,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -293,7 +690,7 @@
       
         
           
-            <p>越来越能感觉到“一寸光阴一寸金”的含义。人生中的每件事无不与时间关系很大。<br>娱乐，思考，睡觉都需要时间。<br>关于时间和钱。时间是能换来钱的，就像一个人工作，时薪虽然不高，时间长了，也能赚到一大笔钱。而金钱几乎是人类社会最重要的一种东西，金钱多了，许多事情不用斤斤计较，在生病时也能找到最好的医生，某种程度上也能换来时间。但是时间和金钱的属性是不一样的，时间是生来就有的，但是没法被保存，金钱需要你去努力争取，但却能被存储。两者都很重要，但谁大谁小，却没法确认。</p>
+            <p>越来越能感觉到“一寸光阴一寸金”的含义。人生中的每件事无不与时间关系很大。<br>娱乐，思考，学习，睡觉都需要时间。<br>关于时间和钱。时间是能换来钱的，就像一个人工作，时薪虽然不高，时间长了，也能赚到一大笔钱。而金钱几乎是人类社会最重要的一种东西，金钱多了，许多事情不用斤斤计较，在生病时也能找到最好的医生，某种程度上也能换来时间。但是时间和金钱的属性是不一样的，时间是生来就有的，但是没法被保存，金钱需要你去努力争取，但却能被存储。两者都很重要，但谁大谁小，却没法确认。</p>
 <p>如果把时间看成一个维度，我们每个人的一生就像从四维空间的一个点走到另一个点。这样的话，一个人的少年，成年只是一个人的属性。所谓老人和孩子也就是属性的不同而已了。我们也似乎没必要把年龄看得非常重。</p>
 <p>但是对于一个人，时间总是在不断流逝的，在确定的时间内，做出最有成效的事情，总是没有错误的。</p>
 
@@ -344,12 +741,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/Hello-Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -363,7 +760,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/26/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2017/09/26/Hello-Hexo/" itemprop="url">Hello, Hexo</a></h1>
         
 
         <div class="post-meta">
@@ -375,7 +772,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T00:09:38+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T22:13:36+08:00">
                 2017-09-26
               </time>
             
@@ -385,6 +782,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -415,15 +834,7 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p>因为WordPress的重量，又不能很好的支持Markdown，博客正式转用<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>了。<br>迁移过程主要参照了<a href="http://www.jianshu.com/p/fd233d967e88" target="_blank" rel="external">博客搬家记：从 Wordpress 到 Hexo+Github</a>。<br>使用hexo-migrator-wordpress插件迁移的过程中，遇到了一些问题，虽然经过折腾一一化解，但是最终的效果还是只能算差强人意（<a href="http://wordpress.dahui1990.com/" target="_blank" rel="external">旧博客传送门</a>）。</p>
 
           
         
@@ -477,7 +888,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -513,6 +924,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -604,7 +1037,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -640,6 +1073,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -724,7 +1179,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -760,6 +1215,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -844,7 +1321,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -880,6 +1357,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -969,7 +1468,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1005,6 +1504,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1089,7 +1610,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1126,6 +1647,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1157,285 +1700,6 @@
           
             <p>首先推荐三篇文章：<br>1.<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a><br>总体概括了MySQL内部的索引原理及索引使用策略<br>2.<a href="http://blog.csdn.net/voidccc/article/details/40077329" target="_blank" rel="external">剖析Mysql的InnoDB索引</a><br>侧重剖析了InnoDB的Page结构，更加详细的见Jeremy Cole的<a href="https://blog.jcole.us/innodb/" target="_blank" rel="external">博客</a><br>3.Judy的<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.02.md" target="_blank" rel="external">B树</a><br>侧重数据结构的分析，注意只是数据结构。。<br>此外还有官方的<a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-storage-engine.html" target="_blank" rel="external">InnoDB文档</a></p>
 <p>总结重要的内容如下：<br>1. 使用B+的原因，相对于红黑树等二叉查找树，树的高度低，能减少IO次数。相对于B-树，稳定，更利于范围查询。相对于Hash表，更利于范围查询，伸缩性更好（在无法预知表中记录数时），详细见<a href="http://stackoverflow.com/questions/7306316/b-tree-vs-hash-table" target="_blank" rel="external">这里的讨论</a><br>2. InnoDB与MyISAM索引实现的区别，聚集索引和非聚集索引的区别<br>3. 建索引时的最左前缀原理，数据库表的主键选择<br>4. 慢查询日志及explain关键字</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/04/github浅探/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/04/github浅探/" itemprop="url">github浅探</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-04T19:56:34+08:00">
-                2017-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>学习<a href="https://github.com/julycoding/The-Art-Of-Programming-By-July" target="_blank" rel="external">The-Art-Of-Programming-By-July</a>，感觉写的不错，突然想看下github上比较流行的Repositories<br>可以在<a href="https://github.com/search/advanced?l=&amp;q=stars%3A%3E10000&amp;ref=advsearch&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank" rel="external">这里</a>，对github上的资源进行自定义搜索，<a href="http://githubstats.lip.is/repositories/" target="_blank" rel="external">这里</a>(貌似需要翻墙.手动汗..)也有比较新的总体的统计<br>截止当前，有以下结论：<br>1.star数大于10000的项目有354个, 其中JavaScript的项目占了127个。。<br><img src="http://dahui1990.com/wp-content/uploads/2017/02/git1-1024x629.jpg" alt="git1"><br>2.按组织来查看，前16名如下：<br><img src="http://dahui1990.com/wp-content/uploads/2017/02/git2-1024x726.jpg" alt="git2"><br>其中的第三四名。。我也不太懂。<br>取前16，只是因为第16名。。其他的有<br><img src="http://dahui1990.com/wp-content/uploads/2017/02/git3-1024x97.jpg" alt="git3"><br>三大组织在排名上，还有一些分支，大家可以自行<a href="http://githubstats.lip.is/organizations/?limit=1024" target="_blank" rel="external">查看</a><br>个人分析：<br>一.JavaScript项目较多，可能因为<br>1.在web上，后端有多种语言实现，而前端的业务逻辑实现主要使用JavaScript<br>2.node及相关项目也被归到了JavaScript<br>3.前段JavaScript由浏览器执行，相对难以加密<br>4.JavaScript相对于后端代码库，更容易集成到项目中<br>二.国内公司的开源力度(技术水平?)，相比国际顶尖公司，还是有些差距<br>三.教程类项目容易获得高star，比如<a href="https://github.com/vhf/free-programming-books" target="_blank" rel="external">free-programming-books</a>，<a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external">awesome</a>，<a href="https://github.com/jwasham/google-interview-university" target="_blank" rel="external">google-interview-university</a>…内容也的确不错。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/19/MySQL-server-has-gone-away/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/19/MySQL-server-has-gone-away/" itemprop="url">'MySQL server has gone away'</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-19T21:50:12+08:00">
-                2017-01-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一个很久没有运行的后台服务，在接收到数据，运行时，报了这个错误<br>原因是服务用的Django ORM与mysql在长久没有数据交互后，它们之间的长连接断掉了。</p>
-<p>以下分析基于django1.6.0<br>Djando自带的ORM是比较定制化的，在django处理一个web请求时，在请求开始时，和请求处理完成时，Django都会尝试关闭数据库连接，如下<a href="https://github.com/django/django/blob/stable/1.6.x/django/db/__init__.py#L87" target="_blank" rel="external">代码</a>所示:<br>`</p>
-<h1 id="Register-an-event-to-reset-transaction-state-and-close-connections-past"><a href="#Register-an-event-to-reset-transaction-state-and-close-connections-past" class="headerlink" title="Register an event to reset transaction state and close connections past"></a>Register an event to reset transaction state and close connections past</h1><h1 id="their-lifetime-NB-abort-doesn’t-do-anything-outside-of-a-transaction"><a href="#their-lifetime-NB-abort-doesn’t-do-anything-outside-of-a-transaction" class="headerlink" title="their lifetime. NB: abort() doesn’t do anything outside of a transaction."></a>their lifetime. NB: abort() doesn’t do anything outside of a transaction.</h1><p>def close_old_connections(**kwargs):<br>    for conn in connections.all():</p>
-<pre><code># Remove this when the legacy transaction management goes away.
-try:
-    conn.abort()
-except DatabaseError:
-    pass
-conn.close_if_unusable_or_obsolete()
-</code></pre><p>signals.request_started.connect(close_old_connections)<br>signals.request_finished.connect(close_old_connections)<br><code>不过，根据[close_if_unusable_or_obsolete](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L461)的定义，除了自动提交和发生错误两种情况外，连接是否确定关闭，还取决于close_at的值，</code><br>def close_if_unusable_or_obsolete(self):<br>    “””<br>    Closes the current connection if unrecoverable errors have occurred,<br>    or if it outlived its maximum age.<br>    “””<br>    if self.connection is not None:</p>
-<pre><code># If the application didn&apos;t restore the original autocommit setting,
-# don&apos;t take chances, drop the connection.
-if self.get_autocommit() != self.settings_dict[&apos;AUTOCOMMIT&apos;]:
-    self.close()
-    return
-
-if self.errors_occurred:
-    if self.is_usable():
-        self.errors_occurred = False
-    else:
-        self.close()
-        return
-
-if self.close_at is not None and time.time() &gt;= self.close_at:
-    self.close()
-    return
-</code></pre><p><code>[self.close_at](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L109)会在连接时改变:</code><br>max_age = self.settings_dict[‘CONN_MAX_AGE’]<br>self.close_at = None if max_age is None else time.time() + max_age<br><code>所以，具体到每个请求是否关闭连接，还取决于CONN_MAX_AGE的配置，而CONN_MAX_AGE的默认值是0，所以默认情况下，每次处理完毕web请求时，都会关闭数据库连接。
-另外一个很重要的一点是，Django中，存储数据库连接的字典是基于[线程](https://github.com/django/django/blob/stable/1.6.x/django/db/utils.py#L148)的：</code><br>class ConnectionHandler(object):<br>    def <strong>init</strong>(self, databases=None):<br>        “””<br>        databases is an optional dictionary of database definitions (structured<br>        like settings.DATABASES).<br>        “””<br>        self._databases = databases<br>        self._connections = local()<br>`<br>所以，如果你的web服务器的网络架构是多线程或者多进程的，即使设置CONN_MAX_AGE不为0，也不会复用旧的数据库连接，在这种情况下，如果数据库是mysql，因为Django orm不再会主动关闭数据库连接，mysql服务器会根据<a href="http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout" target="_blank" rel="external">wait_timeout</a>的设置，一直等待着，这种情况下，很有可能，造成mysql连接数过多，反而适得其反。<br>如果web服务器是单线程或者协程的，例如我测试用的gunicorn+gevents，适当的设置CONN_MAX_AGE，则会复用数据库连接，提升性能。</p>
-<p>回到我们遇到的错误。。<br>我们的服务只用到了Django的ORM，所以在web请求开始和关闭时，django对数据库连接的尝试关闭对于我们的情况完全无效，服务又是一直跑着的单进程单线程，所以，在服务启动时，直到终止，会一直只用同一个数据库连接，长时间的服务不连接数据库，mysql会根据wait_timeout的设置，关闭了连接，所以也就导致了2006，’MySQL server has gone away’错误。<br>之前，使用tornado提供web服务，而使用Django的ORM时，也遇到过这样的错误，原理一样。<br>解决方法有：<br>1.增加mysql中wait_timeout的值，但这有一定的风险，而且不能从根本上解决问题。<br>2.同Django中的做法，在不需要数据库连接时或者开始数据库操作前，尝试关闭数据库连接。<br>3.自己DIY了一个变量CONN_WAIT_AGE，同时修改代码如下：<br>修改<a href="https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L32" target="_blank" rel="external">函数</a>，增加：<br><code>self.conn_wait_age = settings_dict.get(&quot;CONN_WAIT_AGE&quot;, None)
-self.last_access_at = time.time()</code><br>修改<a href="https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L102" target="_blank" rel="external">函数</a>，增加：<br><code>self.last_access_at = time.time()</code><br>修改<a href="https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L131" target="_blank" rel="external">函数</a>为：<br>`<br>def _cursor(self):</p>
-<pre><code># add by zhaohui, in case, &quot;2006, &apos;MySQL server has gone away&apos;&quot; error
-if self.conn_wait_age is not None:
-    n = time.time()
-    if self.last_access_at + self.conn_wait_age &lt; n and self.connection is not None and not self.is_usable():
-        self.close()
-    self.last_access_at = n
-self.ensure_connection()
-with self.wrap_database_errors:
-    return self.create_cursor()
-</code></pre><p>`<br>CONN_WAIT_AGE需要设置为比wait_timeout小的值，不设置为不启用。</p>
 
           
         
@@ -1509,6 +1773,10 @@ with self.wrap_database_errors:
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -1520,22 +1788,31 @@ with self.wrap_database_errors:
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

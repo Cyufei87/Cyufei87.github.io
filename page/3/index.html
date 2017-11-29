@@ -222,12 +222,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/13/python对象的创建/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/27/关于一致性Hash的一些思考/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -241,7 +241,300 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/13/python对象的创建/" itemprop="url">python对象的创建</a></h1>
+                <a class="post-title-link" href="/2015/12/27/关于一致性Hash的一些思考/" itemprop="url">关于一致性Hash的一些思考</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-27T21:25:22+08:00">
+                2015-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>单位memcached服务器迁移，发现对一致性Hash仍有迷惑，在一番学习下，新认识到了以下几点(针对<a href="http://www.last.fm/user/RJ/journal/2007/04/10/rz_libketama_-_a_consistent_hashing_algo_for_memcache_clients" target="_blank" rel="external">libmemcached的一致性哈希算法</a>)：</p>
+<p>1.一致性Hash需要对不同的memcached服务器做Hash操作，而Hash的对象是memcached服务器相关字符串(见<a href="https://github.com/trondn/libmemcached/blob/ca739a890349ac36dc79447e37da7caa9ae819f5/libmemcached/hosts.c#L102" target="_blank" rel="external">update_continuum</a>方法中的变量sort_host)。而这个其实是很重要的，这个意味着，只要ip或port不变，此memcached的各个虚拟节点在一致性哈希环上的位置永远不变，增加或减少memcached服务器或其他操作对这个毫无影响。</p>
+<p>2.虚拟节点是非常重要的，如果没有虚拟节点，一致性哈希在服务器节点比较少的情况下很可能出现严重不满足均衡性的情况，且新增加一个节点只能改善随机一个已有节点的压力。增加了虚拟节点，使上述情况出现的概率大幅度降低。</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/24/Mysql存储Emoji表情/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/24/Mysql存储Emoji表情/" itemprop="url">MySQLl存储Emoji表情</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-24T20:47:19+08:00">
+                2015-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在一个新的项目中，涉及到了用户的评论，测试发现，app不能支持手机内置的表情。</p>
+<p>经过一番探索，发现是后台不能支持存储表情相应的字符。<br>这些表情有个正式的名字<a href="http://apps.timwhitlock.info/emoji/tables/unicode" target="_blank" rel="external">Emoji</a>，Emoji在unicode中是有相应的表示的，而为什么后台不能存储这些字符呢。原因是，数据库相应字段都是使用<a href="https://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8.html" target="_blank" rel="external">utf8字符集</a>(只是指mysql提供的)，而这种字符集使用最多3个字节存储一个字符，而Emoji表情的utf8表示大多需要使用4个字节，于是Emoji当然就存不到数据库里了。</p>
+<p>在5.5.3版本之后，mysql提供了<a href="https://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html" target="_blank" rel="external">utf8mb4</a>，这个字符集支持了4个字节的utf8，在数据库中把字符集修改为这个，即可存储Emoji。同时需要将连接Mysql服务器的字符集设为utf8mb4，如在django中，需要加数据库设置：OPTIONS’: {‘charset’:’utf8mb4’}。</p>
+<p>讨论：</p>
+<p>1.utf8mb4相对utf8的性能，utf8mb4是utf8的超集，性能应该不会超过utf8，但是否更差和差多少呢。</p>
+<p>2.网上提供的方法一般是修改整个数据库的字符集，其实只是修改某些字段的字符集也是可以的（经测试，性能未知），但需要注意，字段的索引是区分utf8和utf8mb4的（以前遇见过相关的问题）。</p>
+<p>3.数据库server和client都需要版本在5.5.3之上，否则会出现问题。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/13/python对象的创建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/08/13/python对象的创建/" itemprop="url">Python对象的创建</a></h1>
         
 
         <div class="post-meta">
@@ -263,6 +556,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -349,7 +664,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -385,6 +700,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -480,7 +817,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -516,6 +853,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -606,7 +965,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -642,6 +1001,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -733,7 +1114,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -769,6 +1150,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -859,7 +1262,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -895,6 +1298,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -988,7 +1413,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1024,6 +1449,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1113,7 +1560,7 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1150,6 +1597,28 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1184,271 +1653,6 @@ foo = Foo()</code><br>那么foo对象是怎样创建的呢，事实上是，会�
 <p>更深入的体会是，在看到了那些比较喜欢的样式后，感觉自己对网页ui的理解也深了一个层次，推而广之，当你看的优秀的东西多了时，自己也会不自觉的变得更加优秀。<br>很早就有类似的感受，城市的孩子比农村的孩子，好大学比差点的大学，发达的国家比落后的国家，之所以好的原因很大程度上也在与氛围与环境吧。<br>见的多了，看的优秀的东西/方法多了，就会成长</p>
 <p>从一个“差”的地方到一个“好”的地方，跨度越大，需要学习的东西也就越多，也会对一个人产生越大的焦虑，跨度超过了这个人的承受范围，这个人也许就会产生自卑，颓唐。当他习惯了这个“好”的地方，”好”会变得平庸，这时，如果要成长，就需要看到进一步“好”的东西<br>同时，学习会带来焦虑，这也意味着成长会伴着痛苦；如果不成长，痛苦也许就会少的多<br>如果不成长，一个人会是什么样呢？一辈子做同样工作的人？一个所谓的傻子，疯子？<br>也许快乐学习是最好的，但快乐学习的速度呢，能做到的人又有多少呢？</p>
 <p>也许积极乐观是我们能做到的，同时不断寻找与学习符合自己状况的“好”的东西。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/17/socket的http服务器更新/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/17/socket的http服务器更新/" itemprop="url">socket的http服务器更新</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-17T12:08:08+08:00">
-                2015-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前些日子写了<a href="http://182.92.214.184/?p=127" target="_blank" rel="external">python的socket实现http服务器</a>之后,最开始这个极微型服务器似乎运行正常,之后也没有去管他</p>
-<p>去了优酷土豆之后,偶然在公司的ubuntu开发机上访问服务器,发现出现了异常,服务器没有返回正常的响应,开始没有去管他,只是重启了下脚本</p>
-<p>再次访问,发现异常依旧,于是仔细查了下原因</p>
-<p>通过以下命令的输出:<br><img src="http://182.92.214.184/wp-content/uploads/2015/04/1.png" alt="1"></p>
-<p>可以定位到代码在:<br><code>while True:
-    r,w,e = select.select([cs],[],[],0)
-    if len(r)&gt;0:req += cs.recv(1024)
-    else:break</code><br>处发生了死循环,另外考虑到网络延迟,和恶意程序发送过大的http请求,代码修改如下:<br>`<br>while True:</p>
-<pre><code>#set timeout to 0.1s
-r,w,e = select.select([cs],[],[],0.1)
-if len(r)&gt;0:
-    data = cs.recv(1024)
-    #in case client close the connect
-    if data==b&quot;&quot;:break
-    req += data
-else:break
-#in case too big request
-if len(req)&gt;8*1024:break
-</code></pre><p>`<br>完整修改已应用到<a href="http://182.92.214.184/?p=127" target="_blank" rel="external">python的socket实现http服务器</a></p>
-<p>异常分析:某些应用程序(浏览器或恶意程序)在连接到服务器,发送了request(或没有发送)之后,立即关闭了到服务器的连接(不一定关闭服务器到client的连接,这个可以参考TCP的四次挥手和python的socket模块的socket._socketobject.shutdown方法)</p>
-<p>备注:真正的web服务器一般会逐行读取request的header(根据http协议),遇到header结束标志(以CRLF开始的一行),表示request的header的结束…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/16/2015-04-16有感/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/16/2015-04-16有感/" itemprop="url">2015.04.16有感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-16T21:54:14+08:00">
-                2015-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>偶然间发现了一个<a href="https://www.byvoid.com/" target="_blank" rel="external">牛人的博客</a>，看到他的项目经历，看到工作经历，然后是阿里技术大牛对其的评价，最后是其<a href="https://www.byvoid.com/blog/trans-siberia-travel-notes" target="_blank" rel="external">西伯利亚之旅</a>…</p>
-<p>我也一直想出国看看，但始终没有成行，不是因为资金，不是因为没有时间，自己的心理始终有些束缚…</p>
-<p>随着年龄的增长，工作经验的积累，也慢慢认识了些事情：</p>
-<p>牛人并没有想象的牛，专业知识并没有想象的专业，事情并没有想象的那么难做…</p>
-<p>人的智力有差别，更重要的是正确的心态，去脚踏实地的做…</p>
-<p>生活总是美好的</p>
 
           
         
@@ -1522,6 +1726,10 @@ if len(req)&gt;8*1024:break
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -1533,22 +1741,31 @@ if len(req)&gt;8*1024:break
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

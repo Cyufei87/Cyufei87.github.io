@@ -222,12 +222,321 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/17/socket的http服务器更新/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/17/socket的http服务器更新/" itemprop="url">socket的http服务器更新</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-17T12:08:08+08:00">
+                2015-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前些日子写了<a href="http://182.92.214.184/?p=127" target="_blank" rel="external">python的socket实现http服务器</a>之后,最开始这个极微型服务器似乎运行正常,之后也没有去管他</p>
+<p>去了优酷土豆之后,偶然在公司的ubuntu开发机上访问服务器,发现出现了异常,服务器没有返回正常的响应,开始没有去管他,只是重启了下脚本</p>
+<p>再次访问,发现异常依旧,于是仔细查了下原因</p>
+<p>通过以下命令的输出:<br><img src="http://182.92.214.184/wp-content/uploads/2015/04/1.png" alt="1"></p>
+<p>可以定位到代码在:<br><code>while True:
+    r,w,e = select.select([cs],[],[],0)
+    if len(r)&gt;0:req += cs.recv(1024)
+    else:break</code><br>处发生了死循环,另外考虑到网络延迟,和恶意程序发送过大的http请求,代码修改如下:<br>`<br>while True:</p>
+<pre><code>#set timeout to 0.1s
+r,w,e = select.select([cs],[],[],0.1)
+if len(r)&gt;0:
+    data = cs.recv(1024)
+    #in case client close the connect
+    if data==b&quot;&quot;:break
+    req += data
+else:break
+#in case too big request
+if len(req)&gt;8*1024:break
+</code></pre><p>`<br>完整修改已应用到<a href="http://182.92.214.184/?p=127" target="_blank" rel="external">python的socket实现http服务器</a></p>
+<p>异常分析:某些应用程序(浏览器或恶意程序)在连接到服务器,发送了request(或没有发送)之后,立即关闭了到服务器的连接(不一定关闭服务器到client的连接,这个可以参考TCP的四次挥手和python的socket模块的socket._socketobject.shutdown方法)</p>
+<p>备注:真正的web服务器一般会逐行读取request的header(根据http协议),遇到header结束标志(以CRLF开始的一行),表示request的header的结束…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/16/2015-04-16有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/16/2015-04-16有感/" itemprop="url">2015.04.16有感</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-16T21:54:14+08:00">
+                2015-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂想/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>偶然间发现了一个<a href="https://www.byvoid.com/" target="_blank" rel="external">牛人的博客</a>，看到他的项目经历，看到工作经历，然后是阿里技术大牛对其的评价，最后是其<a href="https://www.byvoid.com/blog/trans-siberia-travel-notes" target="_blank" rel="external">西伯利亚之旅</a>…</p>
+<p>我也一直想出国看看，但始终没有成行，不是因为资金，不是因为没有时间，自己的心理始终有些束缚…</p>
+<p>随着年龄的增长，工作经验的积累，也慢慢认识了些事情：</p>
+<p>牛人并没有想象的牛，专业知识并没有想象的专业，事情并没有想象的那么难做…</p>
+<p>人的智力有差别，更重要的是正确的心态，去脚踏实地的做…</p>
+<p>生活总是美好的</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/08/ajax的cache选项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -263,6 +572,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -349,7 +680,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -385,6 +716,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -473,7 +826,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -487,7 +840,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/06/关于建立基于python的web应用/" itemprop="url">关于建立基于python的web应用</a></h1>
+                <a class="post-title-link" href="/2015/03/06/关于建立基于python的web应用/" itemprop="url">关于建立基于Python的web应用</a></h1>
         
 
         <div class="post-meta">
@@ -509,6 +862,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -594,7 +969,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -608,7 +983,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/06/理解python的字符串编码/" itemprop="url">理解python的字符串编码</a></h1>
+                <a class="post-title-link" href="/2015/03/06/理解python的字符串编码/" itemprop="url">理解Python的字符串编码</a></h1>
         
 
         <div class="post-meta">
@@ -630,6 +1005,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -715,7 +1112,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -751,6 +1148,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -840,7 +1259,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -854,7 +1273,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/02/09/python的socket实现http服务器/" itemprop="url">python的socket实现http服务器</a></h1>
+                <a class="post-title-link" href="/2015/02/09/python的socket实现http服务器/" itemprop="url">Python的socket实现http服务器</a></h1>
         
 
         <div class="post-meta">
@@ -876,6 +1295,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -906,7 +1347,7 @@
       
         
           
-            <p>为了深入熟悉python，完成了下面的一个简单的http服务器。</p>
+            <p>为了深入熟悉Python，完成了下面的一个简单的http服务器。</p>
 <p>代码用到的module主要有：</p>
 <p>multiprocessing，来处理并发http请求，不用的threading的原因是python的gil</p>
 <p>socket，接受http请求，并返回响应</p>
@@ -1021,7 +1462,7 @@ print(&quot;exit..&quot;)
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1057,6 +1498,28 @@ print(&quot;exit..&quot;)
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1155,7 +1618,7 @@ print(&quot;exit..&quot;)
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1191,6 +1654,28 @@ print(&quot;exit..&quot;)
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1270,287 +1755,6 @@ print(&quot;exit..&quot;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/03/db2学习之2014-12-03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/03/db2学习之2014-12-03/" itemprop="url">db2学习之2014.12.03</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-03T18:48:07+08:00">
-                2014-12-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2014.12.02，db2 crash..</p>
-<p>我并不是专门负责db2管理的，出于兴趣，还是去探索了下…</p>
-<p>网上一通搜索，定位了问题应该是下面中的一个：</p>
-<p>1. linux服务器某些限制，如限制进程创建的线程数，使用到的最大虚拟内存</p>
-<p>2. db2配置的问题，过多的客户端程序连接db2 server，导致超过了db2本身的最大agents(连接)数.</p>
-<p>又一桶搜索，加上稍稍的分析，慢慢的特别聚焦到第二个原因上的..</p>
-<p>通过命令db2 get snapshot for database manager，发现db2的连接数在170左右，而查看db2配置(db2 get dbm cfg)，发现输出中有下面两句：</p>
-<p>Max number of coordinating agents     (MAX_COORDAGENTS) = AUTOMATIC(200)</p>
-<p>Max number of client connections      (MAX_CONNECTIONS) = AUTOMATIC(MAX_COORDAGENTS)</p>
-<p>看见了200这个数，比较170，感觉的确相差不多…</p>
-<p>唯一说不通的是，在其他linux服务器上的db2(同样的数据库，同样的应用)为什么从没出现过类似情况？</p>
-<p>用命令db2 list applications show detail查看详细数据库的连接情况，发现crash的db2的本地连接远多于其他的服务器…</p>
-<p>进一步分析输出，发现db2对于每个database都有差不多30个的本地连接，而未crash的db2只有大约10个…</p>
-<p>我们的db2上创建了3个database，算起来就多了差不多3*20个的连接，似乎可以解释了</p>
-<p>实际上，是因为crash的db2的linux服务器实在太好了…24核的…而其他的linux服务器是4核的…</p>
-<p>db2会根据linux服务器的虚拟cpu数来创建db2fw线程..导致对于每个database多创建了20个db2fw，也多了20个agents(连接)..</p>
-<p>经过进一步的探查..</p>
-<p>最大agents的数目其实并不是200，前面有个AUTOMATIC，db2会根据数据库的负载，适当增加这个数目..</p>
-<p>而一个client connection也并不一定对应一个coordinating agent…</p>
-<p>昨天写过一个shell脚本来定时监测agents数目，发现在23:18左右，agents数据实际是超过了200的…而db2并未崩溃…</p>
-<p>昨天crash的原因也许并不在此…</p>
-<p>说些“题外话”把..我其实并不想花费太多时间在这个上边..db2在国内，除了IBM自己..有多少IT企业在用呢？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/shell学习之2014-11-25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/25/shell学习之2014-11-25/" itemprop="url">shell学习之2014.11.25</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-25T18:53:44+08:00">
-                2014-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>$符号的特殊用法..</p>
-<p>截断：</p>
-<p>input: var=”abcde”;echo ${var%d*}</p>
-<p>output: abc</p>
-<p>替换</p>
-<p>input:</p>
-<p>STRING=”This is a string”;echo ${STRING// /<em>};echo ${STRING/ /</em>}</p>
-<p>output:</p>
-<p>This_is_a_string<br>This_is a string</p>
-<p>默认：</p>
-<p>input: default=”hello”; unset var; echo ${var:-$default}</p>
-<p>output: hello</p>
-<p>完全的见<a href="http://tiswww.case.edu/php/chet/bash/bashref.html#SEC32" target="_blank" rel="external">http://tiswww.case.edu/php/chet/bash/bashref.html#SEC32</a></p>
-<p>&nbsp;</p>
-<p>在bash中的一些快捷键：</p>
-<p>ctrl+w:  删除一个单词</p>
-<p>ctrl+u: 从光标所在位置删除到行的开始</p>
-<p>ctrl+a: 移动光标到行首</p>
-<p>ctrl+e: 移动光标到行末</p>
-<p>推荐<a href="http://samrowe.com/wordpress/advancing-in-the-bash-shell/" target="_blank" rel="external">http://samrowe.com/wordpress/advancing-in-the-bash-shell/</a></p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1589,6 +1793,10 @@ print(&quot;exit..&quot;)
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -1600,22 +1808,31 @@ print(&quot;exit..&quot;)
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

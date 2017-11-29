@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术探索," />
+  <meta name="keywords" content="Django,数据库,索引," />
 
 
 
@@ -70,16 +70,16 @@
 
 
 <meta name="description" content="1.db_index控制单个field是否要创建索引2.如果field是外键类型，则db_constraint控制是否有外键约束3.如果是外键类型，默认会创建索引和约束4.unique_together和index_together控制创建联合索引，在mysql中，联合索引中field的顺序会对部分查询产生影响">
-<meta name="keywords" content="技术探索">
+<meta name="keywords" content="Django,数据库,索引">
 <meta property="og:type" content="article">
-<meta property="og:title" content="django中的索引和约束">
+<meta property="og:title" content="Django中的索引和约束">
 <meta property="og:url" content="http://yoursite.com/2016/11/07/django中的索引和约束/index.html">
 <meta property="og:site_name" content="zhaohui&#39;s 小站">
 <meta property="og:description" content="1.db_index控制单个field是否要创建索引2.如果field是外键类型，则db_constraint控制是否有外键约束3.如果是外键类型，默认会创建索引和约束4.unique_together和index_together控制创建联合索引，在mysql中，联合索引中field的顺序会对部分查询产生影响">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-25T17:38:18.000Z">
+<meta property="og:updated_time" content="2017-11-26T11:32:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="django中的索引和约束">
+<meta name="twitter:title" content="Django中的索引和约束">
 <meta name="twitter:description" content="1.db_index控制单个field是否要创建索引2.如果field是外键类型，则db_constraint控制是否有外键约束3.如果是外键类型，默认会创建索引和约束4.unique_together和index_together控制创建联合索引，在mysql中，联合索引中field的顺序会对部分查询产生影响">
 
 
@@ -116,7 +116,7 @@
 
 
 
-  <title>django中的索引和约束 | zhaohui's 小站</title>
+  <title>Django中的索引和约束 | zhaohui's 小站</title>
   
 
 
@@ -228,7 +228,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -240,7 +240,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">django中的索引和约束</h1>
+          <h1 class="post-title" itemprop="name headline">Django中的索引和约束</h1>
         
 
         <div class="post-meta">
@@ -262,6 +262,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -308,7 +330,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术探索/" rel="tag"># 技术探索</a>
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
           
         </div>
       
@@ -321,8 +347,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/29/我对web后台的一些看法/" rel="next" title="我对web后台的一些看法">
-                <i class="fa fa-chevron-left"></i> 我对web后台的一些看法
+              <a href="/2016/09/29/我对web后台的一些看法/" rel="next" title="我对Web后台的一些看法">
+                <i class="fa fa-chevron-left"></i> 我对Web后台的一些看法
               </a>
             
           </div>
@@ -389,6 +415,10 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -400,22 +430,31 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术探索," />
+  <meta name="keywords" content="MySQL,InnoDB,MyISAM," />
 
 
 
@@ -70,14 +70,14 @@
 
 
 <meta name="description" content="首先推荐三篇文章：1.MySQL索引背后的数据结构及算法原理总体概括了MySQL内部的索引原理及索引使用策略2.剖析Mysql的InnoDB索引侧重剖析了InnoDB的Page结构，更加详细的见Jeremy Cole的博客3.Judy的B树侧重数据结构的分析，注意只是数据结构。。此外还有官方的InnoDB文档 总结重要的内容如下：1. 使用B+的原因，相对于红黑树等二叉查找树，树的高度低，能减少I">
-<meta name="keywords" content="技术探索">
+<meta name="keywords" content="MySQL,InnoDB,MyISAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL学习">
 <meta property="og:url" content="http://yoursite.com/2017/02/17/MySQL学习/index.html">
 <meta property="og:site_name" content="zhaohui&#39;s 小站">
 <meta property="og:description" content="首先推荐三篇文章：1.MySQL索引背后的数据结构及算法原理总体概括了MySQL内部的索引原理及索引使用策略2.剖析Mysql的InnoDB索引侧重剖析了InnoDB的Page结构，更加详细的见Jeremy Cole的博客3.Judy的B树侧重数据结构的分析，注意只是数据结构。。此外还有官方的InnoDB文档 总结重要的内容如下：1. 使用B+的原因，相对于红黑树等二叉查找树，树的高度低，能减少I">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-09-25T17:38:18.000Z">
+<meta property="og:updated_time" content="2017-11-26T11:36:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL学习">
 <meta name="twitter:description" content="首先推荐三篇文章：1.MySQL索引背后的数据结构及算法原理总体概括了MySQL内部的索引原理及索引使用策略2.剖析Mysql的InnoDB索引侧重剖析了InnoDB的Page结构，更加详细的见Jeremy Cole的博客3.Judy的B树侧重数据结构的分析，注意只是数据结构。。此外还有官方的InnoDB文档 总结重要的内容如下：1. 使用B+的原因，相对于红黑树等二叉查找树，树的高度低，能减少I">
@@ -228,7 +228,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhaohui">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -262,6 +262,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -309,7 +331,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术探索/" rel="tag"># 技术探索</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/InnoDB/" rel="tag"># InnoDB</a>
+          
+            <a href="/tags/MyISAM/" rel="tag"># MyISAM</a>
           
         </div>
       
@@ -322,8 +348,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/04/github浅探/" rel="next" title="github浅探">
-                <i class="fa fa-chevron-left"></i> github浅探
+              <a href="/2017/02/04/github浅探/" rel="next" title="GitHub浅探">
+                <i class="fa fa-chevron-left"></i> GitHub浅探
               </a>
             
           </div>
@@ -390,6 +416,10 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
             <p class="site-author-name" itemprop="name">zhaohui</p>
             <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
         </div>
@@ -401,22 +431,31 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">8</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言虽然Python 3早在2008年就发布了，但是似乎Python 3的使用率仍然不高(来自PyCharm的一个统计)。本文将在四个方面对Python 2和Python 3进行对比。 兼容性这个大概是许多Python 2用户不愿意转向Python 3的最重要原因。但是根据py3readiness的数据，将近96%的使用最多的Python包已经支持了Python 3。而根据PEP 373，Pyth">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 3 vs Python 2">
+<meta property="og:url" content="http://yoursite.com/2017/10/28/Python-2-vs-Python-3/index.html">
+<meta property="og:site_name" content="zhaohui&#39;s 小站">
+<meta property="og:description" content="前言虽然Python 3早在2008年就发布了，但是似乎Python 3的使用率仍然不高(来自PyCharm的一个统计)。本文将在四个方面对Python 2和Python 3进行对比。 兼容性这个大概是许多Python 2用户不愿意转向Python 3的最重要原因。但是根据py3readiness的数据，将近96%的使用最多的Python包已经支持了Python 3。而根据PEP 373，Pyth">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/python_speed.jpg">
+<meta property="og:updated_time" content="2017-11-29T04:29:53.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 3 vs Python 2">
+<meta name="twitter:description" content="前言虽然Python 3早在2008年就发布了，但是似乎Python 3的使用率仍然不高(来自PyCharm的一个统计)。本文将在四个方面对Python 2和Python 3进行对比。 兼容性这个大概是许多Python 2用户不愿意转向Python 3的最重要原因。但是根据py3readiness的数据，将近96%的使用最多的Python包已经支持了Python 3。而根据PEP 373，Pyth">
+<meta name="twitter:image" content="http://yoursite.com/images/python_speed.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/28/Python-2-vs-Python-3/"/>
+
+
+
+
+
+  <title>Python 3 vs Python 2 | zhaohui's 小站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhaohui's 小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/28/Python-2-vs-Python-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 3 vs Python 2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-28T14:24:15+08:00">
+                2017-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>虽然Python 3早在2008年就发布了，但是似乎Python 3的使用率仍然不高(<a href="https://twitter.com/pycharm/status/865659029460209664" target="_blank" rel="external">来自PyCharm的一个统计</a>)。本文将在四个方面对Python 2和Python 3进行对比。</p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>这个大概是许多Python 2用户不愿意转向Python 3的最重要原因。但是根据<a href="http://py3readiness.org/" target="_blank" rel="external">py3readiness</a>的数据，将近96%的使用最多的Python包已经支持了Python 3。<br>而根据<a href="https://www.python.org/dev/peps/pep-0373/" target="_blank" rel="external">PEP 373</a>，Python 2将于2020年停止维护。<a href="http://www.python3statement.org/" target="_blank" rel="external">许多流行的Python项目也声明将于2020年以前停止对Python 2的支持</a>。<br>Python最流行的Web框架Django也声明了，<a href="https://docs.djangoproject.com/en/dev/faq/install/#what-python-version-should-i-use-with-django" target="_blank" rel="external">Django1.11将是最后一个支持Python 2的版本</a>。</p>
+<h3 id="Python-3的新特性-截止到Python-3-6"><a href="#Python-3的新特性-截止到Python-3-6" class="headerlink" title="Python 3的新特性(截止到Python 3.6)"></a>Python 3的新特性(截止到Python 3.6)</h3><p>这里简述几个比较重要的</p>
+<ol>
+<li>类型注解。它允许你给函数增加一些说明的信息</li>
+<li>标准库asyncio提供了内置的异步IO支持。不再需要gevent，tornado等第三方库</li>
+<li>lazy化。许多函数例如range，map，dict.keys不再直接返回list，而是返回一个可迭代对象</li>
+<li>更清晰明确的字符串表示。str表示Unicode字符串，bytes表示二进制数据</li>
+</ol>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p><a href="https://speakerdeck.com/playpauseandstop/python-3-dot-6-and-performance-a-love-story" target="_blank" rel="external">PyCon2017有一个关于Python 3.6性能的分享</a>，得出的结论如下：</p>
+<blockquote>
+<p>Python 2.7 is still fastest Python<br>Python 3.5 much faster Python 3.4<br>Python 3.6 faster Python 3.5<br>Python 3.7 has some significant improvements already</p>
+</blockquote>
+<p><a href="https://speed.python.org/comparison/?exe=12%2BL%2B3.6%2C12%2BL%2B2.7&amp;ben=616%2C617%2C618%2C619%2C620%2C621%2C622%2C623%2C624%2C625%2C626%2C627%2C628%2C629%2C630%2C631%2C632%2C680%2C633%2C634%2C635%2C636%2C637%2C638%2C639%2C640%2C641%2C642%2C643%2C644%2C645%2C646%2C647%2C648%2C681%2C649%2C650%2C651%2C652%2C653%2C654%2C655%2C656%2C657%2C658%2C659%2C660%2C661%2C682%2C662%2C663%2C664%2C665%2C666%2C667%2C669%2C668%2C670%2C671%2C672%2C673%2C674%2C675%2C678%2C677%2C676%2C679&amp;env=1&amp;hor=false&amp;bas=12%2BL%2B2.7&amp;chart=normal+bars" target="_blank" rel="external">这里</a>是最新Python 2.7和Python 3.6在各个基准测试上的结果，<a href="http://pyperformance.readthedocs.io/benchmarks.html#available-benchmarks" target="_blank" rel="external">这里</a>是不同测试的一些说明<br>分享截图如下(写本篇文章时的数据)：<br><img src="/images/python_speed.jpg" alt=""><br>可以看出，除了python_startup，python_startup_no_site，unpickle_pure_python三个测试的数据上，Python 3.6的性能要远远落后Python 2.7以外，其他所有的测试Python 3.6仅落后Python 2.7很少，或者相对于Python 2.7的性能有所提升</p>
+<h3 id="学习成本"><a href="#学习成本" class="headerlink" title="学习成本"></a>学习成本</h3><p>不可否认，大多数关于Python的学习资料还是Python 2的，网络上各个技术论坛或技术网站涉及到Python的内容大多也是指Python 2。<br>但是另一方面，Python 3虽然增加了不少新特性，但绝大多数Python 2的问题解决方案或文档也是适用于Python 3的，而且Python 2.7作为一个过渡版本，也启到了一定的作用。而且可以预料，关于Python 3的资料会越来越多。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li>有一个反对使用Python 3的文章<a href="https://learnpythonthehardway.org/book/nopython3.html" target="_blank" rel="external">The Case Against Python 3</a>及对它的<a href="https://eev.ee/blog/2016/11/23/a-rebuttal-for-python-3/" target="_blank" rel="external">反驳</a></li>
+<li><a href="http://python.jobbole.com/87814/" target="_blank" rel="external">PyCon2017上分享的Instagram为何和如何迁移到Python 3</a>(<a href="https://www.youtube.com/watch?v=66XoCk79kjM" target="_blank" rel="external">YouTube上的视频</a>)</li>
+</ol>
+<h3 id="我的看法"><a href="#我的看法" class="headerlink" title="我的看法"></a>我的看法</h3><ul>
+<li>未来是Python 3的</li>
+<li>新项目可以完全使用Python 3，老的项目可以根据项目的状况选择是否迁移到Python 3</li>
+<li>就学习Python而言，因为大部分的资料仍然是Python 2的，可以根据自己的计算机基础选择Python 2或者Python 3，比选择更重要的是踏实学和实践</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/10/Python多进程写文件时的一些探究/" rel="next" title="Python多进程写文件时的一些探究">
+                <i class="fa fa-chevron-left"></i> Python多进程写文件时的一些探究
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4"
+              alt="zhaohui" />
+          
+            <p class="site-author-name" itemprop="name">zhaohui</p>
+            <p class="site-description motion-element" itemprop="description">和平，宁静，奋斗</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">2.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-3的新特性-截止到Python-3-6"><span class="nav-number">3.</span> <span class="nav-text">Python 3的新特性(截止到Python 3.6)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">4.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习成本"><span class="nav-number">5.</span> <span class="nav-text">学习成本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的看法"><span class="nav-number">7.</span> <span class="nav-text">我的看法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaohui</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
