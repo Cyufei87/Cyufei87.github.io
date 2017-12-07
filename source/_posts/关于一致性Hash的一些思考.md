@@ -1,7 +1,7 @@
 ---
 title: 关于一致性Hash的一些思考
-tags:
-  - 技术探索
+tags: [Hash, memcached]
+category: 技术探索
 date: 2015-12-27 21:25:22
 ---
 

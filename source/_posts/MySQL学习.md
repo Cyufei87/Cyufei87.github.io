@@ -1,7 +1,7 @@
 ---
 title: MySQL学习
-tags:
-  - 技术探索
+tags: [MySQL, InnoDB, MyISAM]
+category: 技术探索
 date: 2017-02-17 00:35:44
 ---
 

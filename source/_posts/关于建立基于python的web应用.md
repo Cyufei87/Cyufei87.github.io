@@ -1,7 +1,7 @@
 ---
-title: 关于建立基于python的web应用
-tags:
-  - 技术探索
+title: 关于建立基于Python的web应用
+tags: [Python]
+category: 技术探索
 date: 2015-03-06 17:57:43
 ---
 

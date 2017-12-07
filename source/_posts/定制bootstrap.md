@@ -1,7 +1,7 @@
 ---
 title: 定制bootstrap
-tags:
-  - 技术探索
+tags: [bootstrap]
+category: 技术探索
 date: 2015-05-20 16:28:19
 ---
 

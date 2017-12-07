@@ -1,7 +1,7 @@
 ---
-title: wordpress初探
-tags:
-  - 技术探索
+title: WordPress初探
+tags: [WordPress]
+category: 技术探索
 date: 2014-11-03 16:45:03
 ---
 

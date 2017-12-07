@@ -1,11 +1,11 @@
 ---
-title: python的socket实现http服务器
-tags:
-  - 技术探索
+title: Python的socket实现http服务器
+tags: [Python]
+category: 技术探索
 date: 2015-02-09 18:05:19
 ---
 
-为了深入熟悉python，完成了下面的一个简单的http服务器。
+为了深入熟悉Python，完成了下面的一个简单的http服务器。
 
 代码用到的module主要有：
 

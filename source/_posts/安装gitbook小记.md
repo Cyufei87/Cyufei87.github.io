@@ -1,7 +1,7 @@
 ---
-title: 安装gitbook小记
-tags:
-  - 技术探索
+title: 安装GitBook小记
+tags: [GitBook]
+category: 技术探索
 date: 2017-01-19 20:01:07
 ---
 

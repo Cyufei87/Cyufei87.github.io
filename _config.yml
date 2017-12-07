@@ -3,12 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: My 窝
+title: zhaohui's 小站
 subtitle:
-description:
+description: 和平，宁静，奋斗
 author: zhaohui
-language:
+language: en
 timezone:
+avatar: https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -73,6 +74,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+scheme: Mist
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

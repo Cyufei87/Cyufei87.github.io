@@ -1,7 +1,7 @@
 ---
 title: Django的cache机制
-tags:
-  - 技术探索
+tags: [Django, cache]
+category: 技术探索
 date: 2015-03-07 22:30:15
 ---
 

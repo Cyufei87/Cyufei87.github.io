@@ -1,7 +1,7 @@
 ---
 title: 使用redis的Sorted Set解决“助我夺宝”
-tags:
-  - 技术探索
+tags: [redis]
+category: 技术探索
 date: 2017-03-16 20:01:46
 ---
 

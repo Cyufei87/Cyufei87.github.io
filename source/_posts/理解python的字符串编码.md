@@ -1,7 +1,7 @@
 ---
-title: 理解python的字符串编码
-tags:
-  - 技术探索
+title: 理解Python的字符串编码
+tags: [Python]
+category: 技术探索
 date: 2015-03-06 11:55:08
 ---
 

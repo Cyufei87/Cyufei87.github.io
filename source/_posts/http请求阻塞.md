@@ -1,7 +1,7 @@
 ---
 title: http请求阻塞
-tags:
-  - 技术探索
+tags: [http]
+category: 技术探索
 date: 2015-02-06 13:45:39
 ---
 

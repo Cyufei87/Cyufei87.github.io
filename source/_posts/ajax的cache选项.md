@@ -1,7 +1,7 @@
 ---
 title: ajax的cache选项
-tags:
-  - 技术探索
+tags: [ajax, cache]
+category: 技术探索
 date: 2015-04-08 16:19:02
 ---
 

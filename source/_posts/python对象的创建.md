@@ -1,7 +1,7 @@
 ---
-title: python对象的创建
-tags:
-  - 技术探索
+title: Python对象的创建
+tags: [Python]
+category: 技术探索
 date: 2015-08-13 20:07:57
 ---
 

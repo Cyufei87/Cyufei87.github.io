@@ -1,7 +1,7 @@
 ---
-title: github浅探
-tags:
-  - 技术探索
+title: GitHub浅探
+tags: [GitHub]
+category: 技术探索
 date: 2017-02-04 19:56:34
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: pretty_print
-tags:
-  - 技术探索
+tags: [Python]
+category: 技术探索
 date: 2016-07-19 18:43:49
 ---
 
-python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看
+Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看
 [![b1](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)
 `
 def pretty_print(obj):

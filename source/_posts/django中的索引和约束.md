@@ -1,7 +1,7 @@
 ---
-title: django中的索引和约束
-tags:
-  - 技术探索
+title: Django中的索引和约束
+tags: [Django, 索引, 数据库]
+category: 技术探索
 date: 2016-11-07 18:30:31
 ---
 

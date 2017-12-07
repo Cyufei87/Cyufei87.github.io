@@ -1,7 +1,7 @@
 ---
-title: 我对web后台的一些看法
-tags:
-  - 技术探索
+title: 我对Web后台的一些看法
+tags: [Web]
+category: 技术探索
 date: 2016-09-29 00:41:13
 ---
 

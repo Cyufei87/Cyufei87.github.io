@@ -1,7 +1,7 @@
 ---
-title: '''MySQL server has gone away'''
-tags:
-  - 技术探索
+title: '"MySQL server has gone away"'
+tags: [MySQL, 数据库]
+category: 技术探索
 date: 2017-01-19 21:50:12
 ---
 
@@ -10,7 +10,7 @@ date: 2017-01-19 21:50:12
 
 以下分析基于django1.6.0
 Djando自带的ORM是比较定制化的，在django处理一个web请求时，在请求开始时，和请求处理完成时，Django都会尝试关闭数据库连接，如下[代码](https://github.com/django/django/blob/stable/1.6.x/django/db/__init__.py#L87)所示:
-`
+```python
 # Register an event to reset transaction state and close connections past
 # their lifetime. NB: abort() doesn't do anything outside of a transaction.
 def close_old_connections(**kwargs):
@@ -23,9 +23,9 @@ def close_old_connections(**kwargs):
         conn.close_if_unusable_or_obsolete()
 signals.request_started.connect(close_old_connections)
 signals.request_finished.connect(close_old_connections)
-`
+```
 不过，根据[close_if_unusable_or_obsolete](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L461)的定义，除了自动提交和发生错误两种情况外，连接是否确定关闭，还取决于close_at的值，
-`
+```python
 def close_if_unusable_or_obsolete(self):
     """
     Closes the current connection if unrecoverable errors have occurred,
@@ -48,15 +48,15 @@ def close_if_unusable_or_obsolete(self):
         if self.close_at is not None and time.time() >= self.close_at:
             self.close()
             return
-`
+```
 [self.close_at](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L109)会在连接时改变:
-`
+```python
 max_age = self.settings_dict['CONN_MAX_AGE']
 self.close_at = None if max_age is None else time.time() + max_age
-`
+```
 所以，具体到每个请求是否关闭连接，还取决于CONN_MAX_AGE的配置，而CONN_MAX_AGE的默认值是0，所以默认情况下，每次处理完毕web请求时，都会关闭数据库连接。
 另外一个很重要的一点是，Django中，存储数据库连接的字典是基于[线程](https://github.com/django/django/blob/stable/1.6.x/django/db/utils.py#L148)的：
-`
+```python
 class ConnectionHandler(object):
     def __init__(self, databases=None):
         """
@@ -65,7 +65,7 @@ class ConnectionHandler(object):
         """
         self._databases = databases
         self._connections = local()
-`
+```
 所以，如果你的web服务器的网络架构是多线程或者多进程的，即使设置CONN_MAX_AGE不为0，也不会复用旧的数据库连接，在这种情况下，如果数据库是mysql，因为Django orm不再会主动关闭数据库连接，mysql服务器会根据[wait_timeout](http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout)的设置，一直等待着，这种情况下，很有可能，造成mysql连接数过多，反而适得其反。
 如果web服务器是单线程或者协程的，例如我测试用的gunicorn+gevents，适当的设置CONN_MAX_AGE，则会复用数据库连接，提升性能。
 
@@ -77,16 +77,16 @@ class ConnectionHandler(object):
 2.同Django中的做法，在不需要数据库连接时或者开始数据库操作前，尝试关闭数据库连接。
 3.自己DIY了一个变量CONN_WAIT_AGE，同时修改代码如下：
 修改[函数](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L32)，增加：
-`
+```python
 self.conn_wait_age = settings_dict.get("CONN_WAIT_AGE", None)
 self.last_access_at = time.time()
-`
+```
 修改[函数](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L102)，增加：
-`
+```python
 self.last_access_at = time.time()
-`
+```
 修改[函数](https://github.com/django/django/blob/stable/1.6.x/django/db/backends/__init__.py#L131)为：
-`
+```python
 def _cursor(self):
     # add by zhaohui, in case, "2006, 'MySQL server has gone away'" error
     if self.conn_wait_age is not None:
@@ -97,5 +97,5 @@ def _cursor(self):
     self.ensure_connection()
     with self.wrap_database_errors:
         return self.create_cursor()
-`
+```
 CONN_WAIT_AGE需要设置为比wait_timeout小的值，不设置为不启用。

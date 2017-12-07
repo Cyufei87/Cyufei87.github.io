@@ -1,7 +1,7 @@
 ---
 title: Etag
-tags:
-  - 技术探索
+tags: [Etag, Tornado]
+category: 技术探索
 date: 2015-08-12 11:10:35
 ---
 

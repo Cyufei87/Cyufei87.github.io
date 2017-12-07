@@ -1,7 +1,7 @@
 ---
 title: Django REST framework小探
-tags:
-  - 技术探索
+tags: [Django, REST framework]
+category: 技术探索
 date: 2017-09-07 19:19:26
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Web性能压力测试
-tags:
-  - 技术探索
+tags: [Web, 测试]
+category: 技术探索
 date: 2017-01-11 10:35:02
 ---
 

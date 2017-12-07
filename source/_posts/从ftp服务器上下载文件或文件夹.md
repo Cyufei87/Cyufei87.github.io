@@ -1,7 +1,7 @@
 ---
 title: 从ftp服务器上下载文件或文件夹
-tags:
-  - 技术探索
+tags: [ftp]
+category: 技术探索
 date: 2016-12-14 17:32:36
 ---
 

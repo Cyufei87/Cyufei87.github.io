@@ -1,8 +1,7 @@
 ---
 title: LeetCode_Solutions
-tags:
-  - LeetCode
-  - 技术探索
+tags: [LeetCode]
+category: 技术探索
 date: 2017-03-09 17:55:23
 ---
 

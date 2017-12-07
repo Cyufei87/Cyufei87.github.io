@@ -1,7 +1,7 @@
 ---
 title: Fortran netCDF library安装记
-tags:
-  - 技术探索
+tags: [Fortran]
+category: 技术探索
 date: 2014-12-10 18:32:00
 ---
 

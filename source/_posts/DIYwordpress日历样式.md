@@ -1,7 +1,7 @@
 ---
 title: DIYwordpress日历样式
-tags:
-  - 技术探索
+tags: [WordPress]
+category: 技术探索
 date: 2015-03-04 16:41:59
 ---
 

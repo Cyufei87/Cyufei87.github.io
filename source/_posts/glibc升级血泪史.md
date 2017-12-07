@@ -1,7 +1,7 @@
 ---
 title: glibc升级血泪史
-tags:
-  - 技术探索
+tags: [glibc, linux]
+category: 技术探索
 date: 2014-11-17 19:07:50
 ---
 

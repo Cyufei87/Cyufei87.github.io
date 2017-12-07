@@ -1,7 +1,7 @@
 ---
 title: socket的http服务器更新
-tags:
-  - 技术探索
+tags: [http]
+category: 技术探索
 date: 2015-04-17 12:08:08
 ---
 

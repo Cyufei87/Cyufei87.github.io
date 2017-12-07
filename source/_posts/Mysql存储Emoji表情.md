@@ -1,7 +1,7 @@
 ---
-title: Mysql存储Emoji表情
-tags:
-  - 技术探索
+title: MySQLl存储Emoji表情
+tags: [MySQL, 数据库]
+category: 技术探索
 date: 2015-09-24 20:47:19
 ---
 
