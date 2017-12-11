@@ -2,6 +2,7 @@
 Thumbs.db
 db.json
 *.log
+*.pyc
 node_modules/
 public/
 .deploy*/

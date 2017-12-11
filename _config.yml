@@ -9,7 +9,7 @@ description: 和平，宁静，奋斗
 author: zhaohui
 language: en
 timezone:
-avatar: https://avatars1.githubusercontent.com/u/9101822?s=400&u=7994f4da75f85639875838c100609436715f1b01&v=4
+avatar: /images/avatar.jpeg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -43,7 +43,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -82,4 +82,3 @@ deploy:
   type: git
   repo: git@github.com:Cyufei87/Cyufei87.git
   branch: master
-
