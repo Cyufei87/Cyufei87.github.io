@@ -261,7 +261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/02/06/http请求阻塞/" itemprop="url">http请求阻塞</a></h1>
+                <a class="post-title-link" href="/2015/02/06/http请求阻塞/" itemprop="url">HTTP请求阻塞</a></h1>
         
 
         <div class="post-meta">
@@ -336,7 +336,7 @@
         
           
             <p>今天发现前几天写的一个定时爬虫程序，突然无故暂停了。</p>
-<p>程序用了python定时框架apscheduler，我加了28个Job，其中有3个job出现了异常。</p>
+<p>程序用了Python定时框架apscheduler，我加了28个Job，其中有3个job出现了异常。</p>
 <p>查看日志，发现是某一次的job执行似乎是停住了，而job的最大同时运行实例数为1，所以下一次的任务执行也就跳了过去（程序定时每半小时运行一次）。导致之后差不到两天的数据没能抓取到。</p>
 <p>查看代码，感觉像调用urllib2.urlopen时，程序得不到回应，所以停住了。</p>
 <p>于是运行</p>
@@ -553,169 +553,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/03/db2学习之2014-12-03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/03/db2学习之2014-12-03/" itemprop="url">db2学习之2014.12.03</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-03T18:48:07+08:00">
-                2014-12-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2014.12.02，db2 crash..</p>
-<p>我并不是专门负责db2管理的，出于兴趣，还是去探索了下…</p>
-<p>网上一通搜索，定位了问题应该是下面中的一个：</p>
-<p>1. linux服务器某些限制，如限制进程创建的线程数，使用到的最大虚拟内存</p>
-<p>2. db2配置的问题，过多的客户端程序连接db2 server，导致超过了db2本身的最大agents(连接)数.</p>
-<p>又一桶搜索，加上稍稍的分析，慢慢的特别聚焦到第二个原因上的..</p>
-<p>通过命令db2 get snapshot for database manager，发现db2的连接数在170左右，而查看db2配置(db2 get dbm cfg)，发现输出中有下面两句：</p>
-<p>Max number of coordinating agents     (MAX_COORDAGENTS) = AUTOMATIC(200)</p>
-<p>Max number of client connections      (MAX_CONNECTIONS) = AUTOMATIC(MAX_COORDAGENTS)</p>
-<p>看见了200这个数，比较170，感觉的确相差不多…</p>
-<p>唯一说不通的是，在其他linux服务器上的db2(同样的数据库，同样的应用)为什么从没出现过类似情况？</p>
-<p>用命令db2 list applications show detail查看详细数据库的连接情况，发现crash的db2的本地连接远多于其他的服务器…</p>
-<p>进一步分析输出，发现db2对于每个database都有差不多30个的本地连接，而未crash的db2只有大约10个…</p>
-<p>我们的db2上创建了3个database，算起来就多了差不多3*20个的连接，似乎可以解释了</p>
-<p>实际上，是因为crash的db2的linux服务器实在太好了…24核的…而其他的linux服务器是4核的…</p>
-<p>db2会根据linux服务器的虚拟cpu数来创建db2fw线程..导致对于每个database多创建了20个db2fw，也多了20个agents(连接)..</p>
-<p>经过进一步的探查..</p>
-<p>最大agents的数目其实并不是200，前面有个AUTOMATIC，db2会根据数据库的负载，适当增加这个数目..</p>
-<p>而一个client connection也并不一定对应一个coordinating agent…</p>
-<p>昨天写过一个shell脚本来定时监测agents数目，发现在23:18左右，agents数据实际是超过了200的…而db2并未崩溃…</p>
-<p>昨天crash的原因也许并不在此…</p>
-<p>说些“题外话”把..我其实并不想花费太多时间在这个上边..db2在国内，除了IBM自己..有多少IT企业在用呢？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/shell学习之2014-11-25/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -735,7 +572,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/11/25/shell学习之2014-11-25/" itemprop="url">shell学习之2014.11.25</a></h1>
+                <a class="post-title-link" href="/2014/11/25/shell学习之2014-11-25/" itemprop="url">Shell学习之2014.11.25</a></h1>
         
 
         <div class="post-meta">
@@ -897,7 +734,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/11/25/hadoop学习之2014-11-25/" itemprop="url">hadoop学习之2014.11.25</a></h1>
+                <a class="post-title-link" href="/2014/11/25/hadoop学习之2014-11-25/" itemprop="url">Hadoop学习之2014.11.25</a></h1>
         
 
         <div class="post-meta">
@@ -1202,387 +1039,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/12/2014-11-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/12/2014-11-12/" itemprop="url">2014.11.12</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-12T18:08:24+08:00">
-                2014-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>昨天玩游戏，不知不觉就1点了，时间过得真快..</p>
-<p>cognos客户端的事有了进展，cognos服务器的版本是10.2.1，之前一直尝试的客户端确实10.2的，只差一个小版本号..</p>
-<p>更新版本后..在配置界面测试的csk检查仍然出错..但启动FM确实能够连接数据源的，不会发生之前的程序崩溃的情况..</p>
-<p>是另一个同事（上级？）发现版本不一致的，我开始并不想安装新版本尝试一下，但主要感觉cognos和我的技术方向不一致，我估计以后用不到它，安装它纯属因为工作安排(这也暴露了我现在的工作状况)..但实在没其他事，加之想看看cognos成功创建project时样子..最终还是安装上了…</p>
-<p>下午无意中了解到linux中，kill掉父进程是不会kill掉子进程的..着实和我想的不一样..</p>
-<p>没有工作的驱动，真是很懒的…</p>
-<p>工作不是学习，尤其是对一个工作了超过两年的人..但工作的确也能学到不少东西..而且一般会记忆深刻，主要因为花时间，精力去做了吧…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/11/2014-11-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/11/2014-11-11/" itemprop="url">2014.11.11</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-11T18:51:41+08:00">
-                2014-11-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>光棍节，属于我的节日，但对此并没有太多感悟</p>
-<p>上午继续折腾cognos，结果是下午的继续折腾</p>
-<p>下午的经历是有一定的波折的，开始时折腾cognos，但不久就感到了烦躁。</p>
-<p>于是看一些游戏的信息，这时候，上级来了，对于被发现偷懒，我并没有太多的难堪，但还是不由自主的把浏览器窗口最小化了..</p>
-<p>问了一些cognos的事情，我的回答是，我这是没有想法了..</p>
-<p>她走了，但我又有点不服，继续寻找cognos的各种信息..</p>
-<p>大约20分钟后，新任务来了….一阵沉默的倾听…很不喜欢这种工作方式..但我在这家公司的定位应该就是这样的..只是我个人不太喜欢罢了..解脱方式大概只有一个..</p>
-<p>说说昨天晚上玩的游戏吧，三国志曹操传..1999年的游戏，真的有点着迷了..</p>
-<p>昨天打赢了两场开始时认为几乎不可能打赢的战斗..由此看来我就是草鸟..只有有一点点上路了..</p>
-<p>关于三国的游戏，最早接触的是“中型游戏机”上的一款，应该也是我接触的第一块战棋类游戏，那时大概是在初一或者初二，至今难忘</p>
-<p>接触过街机上的三国战记和三国志，但“小时候”比较穷，玩的很少，长大了在电脑上玩过</p>
-<p>也玩过三国群英传，主要玩三国群英传3，尝试过新版本的，但感觉太过复杂，节奏太慢…</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/10/2014-11-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/10/2014-11-10/" itemprop="url">2014.11.10</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-10T18:27:06+08:00">
-                2014-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天好困</p>
-<p>瞎忙活了一上午，学习了一下linux的命令df和du，了解了DB2表空间的概念</p>
-<p>中午时看一本电子书，思路总是越偏越远，不由自主想到最近玩的游戏三国志曹操传</p>
-<p>下午一直在搞cognos的FM，结果最终还是没搞出来</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/03/wordpress初探/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1790,7 +1246,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1812,7 +1268,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

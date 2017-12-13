@@ -69,20 +69,20 @@
 
 
 
-<meta name="description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看def pretty_print(obj):     def _pretty_str(obj):         pstr = &amp;quot;&amp;quot;         if isinstance(obj, dict):             pstr += &amp;quot;{&amp;">
+<meta name="description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看1234567891011121314151617181920212223242526272829303132333435def pretty_print(obj):    def _pretty_str(obj):        pstr = &quot;&quot;        if isi">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pretty_print">
 <meta property="og:url" content="http://yoursite.com/2016/07/19/pretty-print/index.html">
 <meta property="og:site_name" content="zhaohui&#39;s 小站">
-<meta property="og:description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看def pretty_print(obj):     def _pretty_str(obj):         pstr = &amp;quot;&amp;quot;         if isinstance(obj, dict):             pstr += &amp;quot;{&amp;">
+<meta property="og:description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看1234567891011121314151617181920212223242526272829303132333435def pretty_print(obj):    def _pretty_str(obj):        pstr = &quot;&quot;        if isi">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg">
 <meta property="og:image" content="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg">
-<meta property="og:updated_time" content="2017-11-26T11:36:44.000Z">
+<meta property="og:updated_time" content="2017-12-13T10:48:00.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pretty_print">
-<meta name="twitter:description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看def pretty_print(obj):     def _pretty_str(obj):         pstr = &amp;quot;&amp;quot;         if isinstance(obj, dict):             pstr += &amp;quot;{&amp;">
+<meta name="twitter:description" content="Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看1234567891011121314151617181920212223242526272829303132333435def pretty_print(obj):    def _pretty_str(obj):        pstr = &quot;&quot;        if isi">
 <meta name="twitter:image" content="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg">
 
 
@@ -335,41 +335,8 @@
       
 
       
-        <p>Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看<br><a href="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" alt="b1"></a><br><code>def pretty_print(obj):
-    def _pretty_str(obj):
-        pstr = &quot;&quot;
-        if isinstance(obj, dict):
-            pstr += &quot;{&quot;
-            first_ele = True
-            for k, v in obj.iteritems():
-                if first_ele:
-                    first_ele = False
-                else:
-                    pstr += &quot;, &quot;
-                pstr += _pretty_str(k) + &quot;:&quot; + _pretty_str(v)
-            pstr += &quot;}&quot;
-        elif isinstance(obj, (list, set, tuple)):
-            if isinstance(obj, list):
-                left, right = &quot;[&quot;, &quot;]&quot;
-            elif isinstance(obj, set):
-                left, right = &quot;{&quot;, &quot;}&quot;
-            elif isinstance(obj, tuple):
-                left, right = &quot;(&quot;, &quot;)&quot;
-            pstr += left
-            first_ele = True
-            for v in obj:
-                if first_ele:
-                    first_ele = False
-                else:
-                    pstr += &quot;, &quot;
-                pstr += _pretty_str(v)
-            pstr += right
-        elif isinstance(obj, basestring):
-            pstr = &#39;&quot;%s&quot;&#39; % str(obj)
-        else:
-            pstr = str(obj)
-        return pstr
-    print(_pretty_str(obj))</code><br>于是乎写了这个函数，效果如下：<br><a href="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" alt="b2"></a></p>
+        <p>Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看<a href="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg" alt="b1"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">pretty_print</span><span class="params">(obj)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_pretty_str</span><span class="params">(obj)</span>:</span></div><div class="line">        pstr = <span class="string">""</span></div><div class="line">        <span class="keyword">if</span> isinstance(obj, dict):</div><div class="line">            pstr += <span class="string">"&#123;"</span></div><div class="line">            first_ele = <span class="keyword">True</span></div><div class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> obj.iteritems():</div><div class="line">                <span class="keyword">if</span> first_ele:</div><div class="line">                    first_ele = <span class="keyword">False</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    pstr += <span class="string">", "</span></div><div class="line">                pstr += _pretty_str(k) + <span class="string">":"</span> + _pretty_str(v)</div><div class="line">            pstr += <span class="string">"&#125;"</span></div><div class="line">        <span class="keyword">elif</span> isinstance(obj, (list, set, tuple)):</div><div class="line">            <span class="keyword">if</span> isinstance(obj, list):</div><div class="line">                left, right = <span class="string">"["</span>, <span class="string">"]"</span></div><div class="line">            <span class="keyword">elif</span> isinstance(obj, set):</div><div class="line">                left, right = <span class="string">"&#123;"</span>, <span class="string">"&#125;"</span></div><div class="line">            <span class="keyword">elif</span> isinstance(obj, tuple):</div><div class="line">                left, right = <span class="string">"("</span>, <span class="string">")"</span></div><div class="line">            pstr += left</div><div class="line">            first_ele = <span class="keyword">True</span></div><div class="line">            <span class="keyword">for</span> v <span class="keyword">in</span> obj:</div><div class="line">                <span class="keyword">if</span> first_ele:</div><div class="line">                    first_ele = <span class="keyword">False</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    pstr += <span class="string">", "</span></div><div class="line">                pstr += _pretty_str(v)</div><div class="line">            pstr += right</div><div class="line">        <span class="keyword">elif</span> isinstance(obj, basestring):</div><div class="line">            pstr = <span class="string">'"%s"'</span> % str(obj)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pstr = str(obj)</div><div class="line">        <span class="keyword">return</span> pstr</div><div class="line">    print(_pretty_str(obj))</div></pre></td></tr></table></figure></p>
+<p>于是乎写了这个函数，效果如下：<br><a href="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" target="_blank" rel="external"><img src="http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg" alt="b2"></a></p>
 
       
     </div>
@@ -483,7 +450,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -505,7 +472,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
