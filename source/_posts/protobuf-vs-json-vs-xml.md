@@ -1,6 +1,6 @@
 ---
-title: protobuf vs json vs xml
-tags: [protobug, json, xml]
+title: Protobuf vs JSON vs XML
+tags: [Protobuf, JSON, XML]
 category: 技术探索
 date: 2015-05-22 21:05:15
 ---

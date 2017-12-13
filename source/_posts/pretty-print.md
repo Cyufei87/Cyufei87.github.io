@@ -5,9 +5,8 @@ category: 技术探索
 date: 2016-07-19 18:43:49
 ---
 
-Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看
-[![b1](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)
-`
+Python内置print打出dict, list等，如果这些类型内部含有中文，则会打出其repr之后的样子，很不方面查看[![b1](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)](http://182.92.214.184/wp-content/uploads/2016/07/b1.jpg)
+```python
 def pretty_print(obj):
     def _pretty_str(obj):
         pstr = ""
@@ -43,6 +42,6 @@ def pretty_print(obj):
             pstr = str(obj)
         return pstr
     print(_pretty_str(obj))
-`
+```
 于是乎写了这个函数，效果如下：
 [![b2](http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg)](http://182.92.214.184/wp-content/uploads/2016/07/b2.jpg)
