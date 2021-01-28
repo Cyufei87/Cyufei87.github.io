@@ -242,6 +242,209 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/09/python的socket实现http服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/02/09/python的socket实现http服务器/" itemprop="url">Python的socket实现http服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-09T18:05:19+08:00">
+                2015-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为了深入熟悉Python，完成了下面的一个简单的http服务器。</p>
+<p>代码用到的module主要有：</p>
+<p>multiprocessing，来处理并发http请求，不用的threading的原因是python的gil</p>
+<p>socket，接受http请求，并返回响应</p>
+<p>select，无阻塞接收http请求数据</p>
+<p>re，模仿django，处理http请求的服务器端文件路径</p>
+<p>logging，日志记录</p>
+<p>mimetypes，获取文件的mime类型</p>
+<p>服务器已经布在了<a href="http://182.92.214.184:8000/" target="_blank" rel="external">这里</a>，或者<a href="http://182.92.214.184:8000/static/1.jpg" target="_blank" rel="external">这个</a></p>
+<p>`<br>from multiprocessing import Pool<br>import socket,select<br>import os,sys<br>import re<br>import logging<br>import mimetypes<br>import traceback<br>from logging.handlers import RotatingFileHandler</p>
+<p>ilog = None</p>
+<p>def init_log():<br>    global ilog<br>    ilog = logging.getLogger(“socketserver”)<br>    log_dir = “/var/log/socketserver”<br>    if not os.path.exists(log_dir):os.makedirs(log_dir)<br>    h1 = RotatingFileHandler(os.path.join(log_dir, “access.log”), maxBytes=5<em>1024</em>1024, backupCount=10)<br>    h2 = logging.StreamHandler(sys.stdout)<br>    f = logging.Formatter(“%(asctime)s:%(levelname)s:%(message)s”, “%Y-%m-%d %H:%M:%S”)<br>    h1.setFormatter(f)<br>    h2.setFormatter(f)<br>    ilog.addHandler(h1)<br>    ilog.addHandler(h2)<br>    ilog.setLevel(logging.DEBUG)</p>
+<p>SERVER = “Guess”<br>ENCODING = “utf8”</p>
+<p>code_dict = {“200”:”OK”,”404”:”Not Found”}<br>def res_header(status_code,content_type,content_length):<br>    if status_code in code_dict:status_info = code_dict[status_code]<br>    else:status_info = “Error”<br>    header = “HTTP/1.1 %s %s\r\n”%(status_code, status_info)<br>    header += “Server: %s\r\n”%SERVER<br>    header += “Content-Type: %s\r\n”%content_type<br>    header += “Content-Length: %s\r\n”%content_length<br>    header += “\r\n”<br>    return header.encode(ENCODING)</p>
+<p>def staticfile(addr, method, path, pid, req):<br>    path = “.”+path<br>    if not os.path.exists(path):<br>        res = “404 Not Found”.encode(“utf8”)<br>        return res_header(“404”, “text/plain”, len(res))+res<br>    content_type = mimetypes.guess_type(path)[0] or “text/plain”<br>    f = open(path, “rb”)<br>    data = f.read()<br>    f.close()<br>    content_length = len(data)<br>    return res_header(“200”, content_type, content_length)+data</p>
+<p>def default(addr, method, path, pid, req):<br>    res = “”<br>    res += “Hello, %s:%s\n”%(addr[0], addr[1])<br>    res += “You are %sing %s”%(method, path)<br>    res += “\n\n”<br>    res += “Your header is:\n”<br>    res += req<br>    res += “                   Process %s”%pid<br>    res = res.encode(ENCODING)<br>    return res_header(“200”, “text/plain”, len(res))+res</p>
+<p>urls = [(“^/favicon.ico$”, staticfile), (“^/static/.<em>$”, staticfile), (“^.</em>$”,default)]</p>
+<p>def handle_request(addr, req, pid):<br>    req = req.decode(“utf8”)<br>    headers = req.split(“\t\n”)<br>    tmp = headers[0].split()<br>    req_method = tmp[0]<br>    req_path = tmp[1]<br>    ilog.info(“Process %s is handleing a request: %s:%s %s %s”%(pid, addr[0], addr[1], req_method, req_path))</p>
+<pre><code>#print(req_path)
+res = b&quot;error&quot;
+for re_path,control in urls:
+    if re.search(re_path, req_path) is not None:
+        res = control(addr, req_method, req_path, pid, req)
+        break
+return res
+</code></pre><p>def worker(s):<br>    pid = os.getpid()<br>    try:<br>        while True:<br>            cs,addr = s.accept():<br>            try:</p>
+<pre><code>            #req = cs.recv(1024)
+            req = b&quot;&quot;
+            while True:
+                #set timeout to 0.1s
+                r,w,e = select.select([cs],[],[],0.1)
+                if len(r)&gt;0:
+                    data = cs.recv(1024)
+                    #in case client close the connect
+                    if data==b&quot;&quot;:break
+                    req += data
+                else:break
+                #in case too big request
+                if len(req)&gt;8*1024:break
+            if len(req)&gt;8*1024 or len(req)&lt;8:continue
+            #print(repr(req.decode(&quot;utf8&quot;)))
+            res = handle_request(addr, req, pid)
+            cs.send(res)
+        except:
+            error_info = traceback.format_exc()
+            print(error_info)
+            ilog.error(error_info)
+        cs.close()
+except KeyboardInterrupt:pass
+</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    argv = sys.argv<br>    if len(argv)&lt;2:<br>        print(“usage:%s [port]”%argv[0])<br>        sys.exit(1)<br>    port = int(argv[1])</p>
+<pre><code>s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((&quot;&quot;,port))
+s.listen(10)
+
+init_log()
+p = Pool(10)
+ilog.info(&quot;server running at %s..&quot;%port)
+#p.map_async(worker, [s]*10)
+p.map(worker, [s]*10)
+print(&quot;exit..&quot;)
+</code></pre><p>`</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/02/06/http请求阻塞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1079,7 +1282,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1101,7 +1304,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1143,7 +1346,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -242,6 +242,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/28/PID-控制调研/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/28/PID-控制调研/" itemprop="url">PID 控制调研</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-28T21:36:29+08:00">
+                2021-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在推荐页的某些场景下，我们需要对不同类型的内容做分发控制，以满足产品策略确定的分发量或分发占比。PID 控制是一种自动控制领域比较常见的控制方式。本文编写 PID 控制代码，并模拟被控制系统，调研使用 PID 控制的可行性。</p>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">limit_by_bounds</span><span class="params">(value, bounds)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> bounds:</div><div class="line">        <span class="keyword">return</span> value</div><div class="line"></div><div class="line">    <span class="keyword">if</span> bounds[<span class="number">0</span>] <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> value &lt; bounds[<span class="number">0</span>]:</div><div class="line">        <span class="keyword">return</span> bounds[<span class="number">0</span>]</div><div class="line">    <span class="keyword">if</span> bounds[<span class="number">1</span>] <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> value &gt; bounds[<span class="number">1</span>]:</div><div class="line">        <span class="keyword">return</span> bounds[<span class="number">1</span>]</div><div class="line"></div><div class="line">    <span class="keyword">return</span> value</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PIDController</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, kp, ki, kd, set_value, i_sum_bounds=None, bounds=None)</span>:</span></div><div class="line">        <span class="string">""" 初始化 PIDController（简化版，不包含采样时间，用于离线模拟 PID 控制的过程）</span></div><div class="line"><span class="string">        :param kp: Kp</span></div><div class="line"><span class="string">        :param ki: Ki</span></div><div class="line"><span class="string">        :param kd: Kd</span></div><div class="line"><span class="string">        :param set_value: 设置值</span></div><div class="line"><span class="string">        :param i_sum_bounds: error 积分的最大值</span></div><div class="line"><span class="string">        :param bounds: PID 输出的最大区间</span></div><div class="line"><span class="string">        """</span></div><div class="line">        self.kp = kp</div><div class="line">        self.ki = ki</div><div class="line">        self.kd = kd</div><div class="line">        self.set_value = set_value</div><div class="line">        self.bounds = bounds</div><div class="line">        self.i_sum_bounds = i_sum_bounds</div><div class="line"></div><div class="line">        self.last_err = <span class="keyword">None</span>  <span class="comment">#上一次执行的 Error</span></div><div class="line">        self.integral_sum = <span class="number">0</span>  <span class="comment"># Error 累积值</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, cur_value)</span>:</span></div><div class="line">        <span class="string">""" 根据当前的状态，计算最新的 PID_output</span></div><div class="line"><span class="string">        :param cur_value: 测量模块测得的系统最新值</span></div><div class="line"><span class="string">        :return: PID_output</span></div><div class="line"><span class="string">        """</span></div><div class="line">        cur_err = self.set_value - cur_value  <span class="comment"># 当前误差</span></div><div class="line">        self.integral_sum = limit_by_bounds(self.integral_sum + cur_err, self.i_sum_bounds)  <span class="comment"># 误差积分</span></div><div class="line"></div><div class="line">        o1 = self.kp * cur_err  <span class="comment"># 比例控制部分输出</span></div><div class="line">        o2 = self.ki * self.integral_sum  <span class="comment"># 积分控制部分输出</span></div><div class="line">        o3 = self.kd * (cur_err - self.last_err) <span class="keyword">if</span> self.last_err <span class="keyword">else</span> <span class="number">0</span>  <span class="comment"># 微分部分输出</span></div><div class="line"></div><div class="line">        <span class="comment"># print(o1, o2, o3)</span></div><div class="line">        self.last_err = cur_err  <span class="comment">#更新 last_err</span></div><div class="line">        <span class="keyword">return</span> limit_by_bounds(o1 + o2 + o3, self.bounds)  <span class="comment"># return PID_output</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reset</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">""" 重置 PIDController """</span></div><div class="line">        self.last_err = <span class="keyword">None</span></div><div class="line">        self.integral_sum = <span class="number">0</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ControlledSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">""" 模拟一个被控制的系统，这里模拟一个 tuner 调参的场景，具体逻辑为：</span></div><div class="line"><span class="string">    假设我们要控制某一类内容的「分发占比」情况，且 tuner 权重与分发占比的关系为：分发占比 = 当前权重 * coefficient</span></div><div class="line"><span class="string">    若当前权重为 0.2，coefficient 为 10，则分发占比为 2%...</span></div><div class="line"><span class="string">    为了模拟更真实的状况，coefficient 随着自动控制的进行，会不断的发生变化，通过传入参数 setting 来实现</span></div><div class="line"><span class="string">    """</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, init_weight, setting=None)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :param init_weight: PID 开始运行时的初始权重</span></div><div class="line"><span class="string">        :param setting: coefficient 设置</span></div><div class="line"><span class="string">        """</span></div><div class="line">        self.cur_w = init_weight</div><div class="line">        self.setting = setting <span class="keyword">if</span> setting <span class="keyword">else</span> [<span class="number">10</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">15</span>]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(self, round_, pid_output)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        针对 PID_output 的处理方式一：将 PID_output 简单的加到内部维护的当前权重 cur_w 上</span></div><div class="line"><span class="string">        :param round_: 当前是第 X 次施加控制，用于实现 coefficient 自动变化</span></div><div class="line"><span class="string">        :param pid_output: PID_output</span></div><div class="line"><span class="string">        :return: 新的「分发占比」</span></div><div class="line"><span class="string">        """</span></div><div class="line">        coefficient = self.setting[(round_ // <span class="number">30</span>) % len(self.setting)]  <span class="comment">#实现 coefficient 的自动变化</span></div><div class="line"></div><div class="line">        self.cur_w += pid_output  <span class="comment"># 更新权重</span></div><div class="line">        <span class="keyword">return</span> self.cur_w * coefficient</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process2</span><span class="params">(self, round_, pid_output)</span>:</span></div><div class="line">        <span class="string">""" 针对 PID_output 的处理方式二：将 PID_output 直接作为当前权重 cur_w """</span></div><div class="line">        coefficient = self.setting[(round_ // <span class="number">30</span>) % len(self.setting)]</div><div class="line">        <span class="keyword">return</span> pid_output * coefficient</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(kp, ki, kd, set_value, init_weight, init_value, round_num, by_process2=False, pid_bounds=None)</span>:</span></div><div class="line">    pid_controller = PIDController(kp, ki, kd, set_value, bounds=pid_bounds)</div><div class="line">    controller_system = ControlledSystem(init_weight=init_weight)</div><div class="line"></div><div class="line">    cur_value = init_value</div><div class="line">    values = [cur_value]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(round_num):</div><div class="line">        output = pid_controller.update(cur_value)</div><div class="line">        <span class="keyword">if</span> by_process2:</div><div class="line">            cur_value = controller_system.process2(i, output)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            cur_value = controller_system.process(i, output)</div><div class="line"></div><div class="line">        values.append(cur_value)</div><div class="line">    <span class="keyword">return</span> values</div></pre></td></tr></table></figure>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>执行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test(kp, ki, kd, <span class="number">5</span>, <span class="number">0.3</span>, <span class="number">3</span>, <span class="number">100</span>)</div></pre></td></tr></table></figure></p>
+<p>若将 ki，kd 固定为 0，将 kp 分别取 0.01，0.07，0.1，0.13，得到（纵轴为 test 函数输出的 values，横轴为对应的 0,1,2…(len(values) - 1)，下同）<br><img src="/images/pid1.png" width="80%" height="80%">可见，根据不同的系统状态（coefficient），这些参数都能将系统调节到 set_value，但是不同的状态下，最优的 kp 是不同的</p>
+<p>若将 ki，kd 固定为 0，将 kp 取 0.2，得到<br><img src="/images/pid2.png" width="80%" height="80%">若 kp 超出特定的范围，会出现失控的状况。在这里，当 coefficient 为 10 时，kp &gt;= 0.2(1/10 * 2) 时会出现这种状况</p>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>执行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test(kp, ki, kd, <span class="number">5</span>, <span class="number">0.3</span>, <span class="number">3</span>, <span class="number">100</span>, by_process2=<span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+<p>若将 ki，kd 固定为 0，调节 kp，可得<br><img src="/images/pid3.png" width="80%" height="80%">可见是存在稳态误差的</p>
+<p>若将 kp 固定为 0.06，kd 固定为 0，调节 ki，可得<br><img src="/images/pid4.png" width="80%" height="80%">可见 PI 是也能达到预期的控制目的的，但如果参数超出范围，仍会出现「失控」的情况</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.bilibili.com/video/BV1wT4y1G7UQ?from=search&amp;seid=4297002407491516846" target="_blank" rel="external">超清楚的PID控制官方科普教程</a></li>
+<li><a href="https://www.zhihu.com/question/23088613" target="_blank" rel="external">如何通俗地解释 PID 参数整定？</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/PID%E6%8E%A7%E5%88%B6%E5%99%A8" target="_blank" rel="external">PID控制器</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/Python的闭包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1623,153 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/使用redis的Sorted-Set解决“助我夺宝”/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/16/使用redis的Sorted-Set解决“助我夺宝”/" itemprop="url">使用Redis的Sorted Set解决“助我夺宝”</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T20:01:46+08:00">
-                2017-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>助我夺宝需求描述如下：<br>1.用户可以助威好友<br>2.用户按照助威数和最后一个助威的时间排名<br>3.排名特定区间的用户可以获得奖品，如排名1-3获得奖品一，排名4-8可以获得奖品二，等等<br>4.实时获取用户当前排名，以及距离下一区间奖品需要的助威数</p>
-<p>问题的难点在于用户的排名是不断变化中的，利用redis的Sorted Set却可以比较好的完成这项需求</p>
-<p>首先可以用关系型数据库mysql存储<br>prize表 – 奖品信息<br>user表 – 用户信息<br>access_record表 – 用户助威好友的记录</p>
-<p>然后设置Sorted Set的<br>member – 用户ID<br>score – 助威数*1e10 + (1e10 - 助威记录ID) # 这里假设助威记录ID小于1e10(根据redis文档，score的取值范围是-2^53与2^53之间)，助威记录ID按照时间递增</p>
-<p>然后就可以提供以下功能：<br>助威 – 先使用zscore取出旧的score，然后可以算出之前的助威数，将助威数加1，再用zadd将新的score存入redis<br>计算用户排名 – 使用zrevrank<br>获取排名前num的用户 – 使用zrevrange<br>计算某一用户距离下一区间奖品需要的助威数 – 先取出此用户对应rank和score,根据rank计算下一排名区间的最低rank(如4-8名获得奖品二，8-15名获得奖品三，用户当前rank为10，则下一区间奖品最低rank为8)，使用zrevrange得到最低rank对应的score_min,根据score_min和score分别计算得到助威数help_num_min和help_num,则help_num_min+1-help_num即是需要的助威数</p>
-<p>假设参与排名的用户数为n个，以上用到的redis操作中，zadd, zrevrank的时间复杂度为O(log(n)),zrevrang根据取出的元素的个数m时间复杂度为O(log(n)+m),zscore的时间复杂度为O(1)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1823,7 +1808,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1845,7 +1830,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1887,7 +1872,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

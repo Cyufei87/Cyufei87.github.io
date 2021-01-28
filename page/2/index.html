@@ -242,6 +242,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/使用redis的Sorted-Set解决“助我夺宝”/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaohui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhaohui's 小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/16/使用redis的Sorted-Set解决“助我夺宝”/" itemprop="url">使用Redis的Sorted Set解决“助我夺宝”</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T20:01:46+08:00">
+                2017-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术探索/" itemprop="url" rel="index">
+                    <span itemprop="name">技术探索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>助我夺宝需求描述如下：<br>1.用户可以助威好友<br>2.用户按照助威数和最后一个助威的时间排名<br>3.排名特定区间的用户可以获得奖品，如排名1-3获得奖品一，排名4-8可以获得奖品二，等等<br>4.实时获取用户当前排名，以及距离下一区间奖品需要的助威数</p>
+<p>问题的难点在于用户的排名是不断变化中的，利用redis的Sorted Set却可以比较好的完成这项需求</p>
+<p>首先可以用关系型数据库mysql存储<br>prize表 – 奖品信息<br>user表 – 用户信息<br>access_record表 – 用户助威好友的记录</p>
+<p>然后设置Sorted Set的<br>member – 用户ID<br>score – 助威数*1e10 + (1e10 - 助威记录ID) # 这里假设助威记录ID小于1e10(根据redis文档，score的取值范围是-2^53与2^53之间)，助威记录ID按照时间递增</p>
+<p>然后就可以提供以下功能：<br>助威 – 先使用zscore取出旧的score，然后可以算出之前的助威数，将助威数加1，再用zadd将新的score存入redis<br>计算用户排名 – 使用zrevrank<br>获取排名前num的用户 – 使用zrevrange<br>计算某一用户距离下一区间奖品需要的助威数 – 先取出此用户对应rank和score,根据rank计算下一排名区间的最低rank(如4-8名获得奖品二，8-15名获得奖品三，用户当前rank为10，则下一区间奖品最低rank为8)，使用zrevrange得到最低rank对应的score_min,根据score_min和score分别计算得到助威数help_num_min和help_num,则help_num_min+1-help_num即是需要的助威数</p>
+<p>假设参与排名的用户数为n个，以上用到的redis操作中，zadd, zrevrank的时间复杂度为O(log(n)),zrevrang根据取出的元素的个数m时间复杂度为O(log(n)+m),zscore的时间复杂度为O(1)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/09/LeetCode-Solutions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1528,148 +1675,6 @@ elif len(file_list) &gt; 0:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/29/我对web后台的一些看法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zhaohui">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhaohui's 小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/29/我对web后台的一些看法/" itemprop="url">我对Web后台的一些看法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-29T00:41:13+08:00">
-                2016-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术探索/" itemprop="url" rel="index">
-                    <span itemprop="name">技术探索</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1. qps, 曾今分析过公司的Nginx日志，单台应用服务器的日访问量大约等于30000<em>峰值qps，而我们web服务的单日访问最高达8亿，如此算来，我们web服务的峰值qps也有25000以上，当然，实际到达后端web应用的访问应该不到其1/4，这些访问又会分发到不同的服务器上。具体到每台服务器，假设每个请求耗费10msCPU时间，单台服务器是16核，完美情况下单台服务器能处理的最高qps也就是100</em>16=1600。<br>2. 服务器抗压分析，首先当然是数据库，处理一个请求时，业务逻辑上的处理，可以通过增加服务器来解决，但是通常为了数据的一致性，数据都存在一个数据库中，高并发时，数据库的访问压力会比较大，解决方案通常是优化业务代码，减少数据库访问，对数据库建立适当的索引，数据库主从甚至多主，使用缓存。如果业务逻辑比较复杂，处理一个请求的时间相对较长，可以考虑使用消息队列，专门一组机器处理后台逻辑。如果后台处理时，IO操作比较多，后台web服务器的网络架构最好选择事件驱动模式或混合模式。根据业务，可以分组服务器。静态文件可以使用CDN等。<br>3. 页面加载速度，首先是从客户端发出请求，到收到所有数据，这个过程就像在客户端和服务器之间架有一条管道，首先一部分水从客户端流向服务器，之后服务器返回响应水流。管道的长度，BGP多线，CDN的存在，就是为了缩短管道的长度。从服务器端收到请求，到服务器开始返回响应，可尽量降低后台处理请求的时间（后端缓存，异步处理数据等）。服务器响应数据的大小，假设用户使用移动3G网络，网速为100KB/s，如果一个页面的数据（包括js,css,图片）是400KB（电脑版baidu首页的级别），只是下载数据就至少需要4s（排除客户端缓存）。前端优化可见<a href="https://segmentfault.com/a/1190000000735395" target="_blank" rel="external">这里</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1723,7 +1728,7 @@ elif len(file_list) &gt; 0:
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1745,7 +1750,7 @@ elif len(file_list) &gt; 0:
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1787,7 +1792,7 @@ elif len(file_list) &gt; 0:
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
